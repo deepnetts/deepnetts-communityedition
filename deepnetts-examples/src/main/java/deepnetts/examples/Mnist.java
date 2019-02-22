@@ -115,9 +115,8 @@ public class Mnist {
             LOGGER.info("----------------");
         });
 
-        // Save network to file as json
-        //FileIO.writeToFile(neuralNet, "mnistDemo.dnet");
-        FileIO.writeToFileAsJson(neuralNet, "mnistDemo.json");
+        // Save network to file
+        FileIO.writeToFile(neuralNet, "mnistDemo.dnet");
     }
 
     public static void main(String[] args) throws IOException {
