@@ -44,7 +44,7 @@ public class LogisticRegression {
 
     public static void main(String[] args) throws IOException {
 
-        // load data set
+        // load data set from csv file
         DataSet dataSet = DataSets.readCsv("datasets/sonar.csv", 60, 1); // get data from some file or method
         // create train and test set by randomly spliting data set
         DataSet[] trainTestSet = DataSets.trainTestSplit(dataSet, 0.7);
