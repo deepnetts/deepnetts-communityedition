@@ -50,11 +50,8 @@ public class Mnist {
     int imageWidth = 28;
     int imageHeight = 28;
 
-    //String labelsFile   = "/home/zoran/datasets/mnist/train/labels.txt";
     String labelsFile = "D:\\datasets\\mnist\\train\\labels.txt";
-    //   String trainingFile = "datasets/mnist/train2.txt"; // 1000 cifara - probaj sa 10 000
-    //     String trainingFile = "/home/zoran/datasets/mnist/train/train.txt"; // 1000 cifara - probaj sa 10 000
-    String trainingFile = "D:\\datasets\\mnist\\train\\train.txt"; // 1000 cifara - probaj sa 10 000
+    String trainingFile = "D:\\datasets\\mnist\\train\\train.txt";
 
     private static final Logger LOGGER = LogManager.getLogger(DeepNetts.class.getName());
 
@@ -66,10 +63,10 @@ public class Mnist {
         // create a data set from images and labels
         ImageSet imageSet = new ImageSet(imageWidth, imageHeight);
         imageSet.loadLabels(new File(labelsFile));
-        imageSet.loadImages(new File(trainingFile), false, 2000); //50000
-       // imageSet.invert();
+        imageSet.loadImages(new File(trainingFile), false, 2000);
+        imageSet.invert();
         imageSet.zeroMean();
-        imageSet.shuffle();
+        //imageSet.shuffle(); // its shuffled in split
 
         ImageSet[] imageSets = imageSet.split(0.65, 0.35);
         int labelsCount = imageSet.getLabelsCount();

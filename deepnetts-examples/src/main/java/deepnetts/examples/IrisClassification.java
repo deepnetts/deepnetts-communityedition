@@ -22,7 +22,6 @@
 package deepnetts.examples;
 
 import deepnetts.data.DataSet;
-import deepnetts.data.BasicDataSet;
 import deepnetts.data.DataSets;
 import deepnetts.eval.PerformanceMeasure;
 import deepnetts.net.FeedForwardNetwork;
