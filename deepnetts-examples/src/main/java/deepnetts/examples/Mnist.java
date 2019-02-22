@@ -63,7 +63,7 @@ public class Mnist {
         // create a data set from images and labels
         ImageSet imageSet = new ImageSet(imageWidth, imageHeight);
         imageSet.loadLabels(new File(labelsFile));
-        imageSet.loadImages(new File(trainingFile), false, 2000);
+        imageSet.loadImages(new File(trainingFile), false, 1000);
         imageSet.invert();
         imageSet.zeroMean();
         //imageSet.shuffle(); // its shuffled in split
