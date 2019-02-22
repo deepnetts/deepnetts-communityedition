@@ -32,10 +32,10 @@ import java.io.IOException;
 import java.util.Arrays;
 
 /**
- * Minimal example for linear regression using FeedForwardNetwork.
+ * Minimal example for linear regression using FeedForwardNetwork, with generated data set.
  * Fits a straight line through the data.
- Uses a single addLayer with one output and linear activation function, and Mean Squared Error for Loss function.
- You can use linear regression to roughly estimate a global trend in data.
+ * Uses a single layer with one output and linear activation function, and Mean Squared Error for Loss function.
+ * Use linear regression to roughly estimate a global trend in data.
  *
  * @author Zoran Sevarac <zoran.sevarac@deepnetts.com>
  */
@@ -64,14 +64,10 @@ public class LinearRegression {
 
             // train network using loaded data set
             neuralNet.train(dataSet);
+
+            //
             PerformanceMeasure pe = neuralNet.test(dataSet);
             System.out.println(pe);
-
-            // print out learned model
-            float slope = neuralNet.getLayers().get(1).getWeights().get(0);
-            float intercept = neuralNet.getLayers().get(1).getBiases()[0];
-            System.out.println("Original function: y = 0.5 * x + 0.2");
-            System.out.println("Estimated/learned function: y = "+slope+" * x + "+intercept);
 
             // perform prediction for some input value
             float[] predictedOutput = neuralNet.predict(new float[] {0.2f});

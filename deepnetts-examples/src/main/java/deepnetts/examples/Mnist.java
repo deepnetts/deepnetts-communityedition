@@ -43,11 +43,9 @@ import org.apache.logging.log4j.Logger;
  * to run this example you must download mnist data set and update image paths
  * in train.txt file
  *
- * Mnist Train test set
- *
- * @author Zoran Sevarac
+ * @author Zoran Sevarac <zoran.sevarac@deepnetts.com>
  */
-public class MnistTrainTest {
+public class Mnist {
 
     int imageWidth = 28;
     int imageHeight = 28;
@@ -68,26 +66,27 @@ public class MnistTrainTest {
         // create a data set from images and labels
         ImageSet imageSet = new ImageSet(imageWidth, imageHeight);
         imageSet.loadLabels(new File(labelsFile));
-        imageSet.loadImages(new File(trainingFile), false, 1000); //50000
-        imageSet.invert();
+        imageSet.loadImages(new File(trainingFile), false, 2000); //50000
+       // imageSet.invert();
         imageSet.zeroMean();
-        //imageSet.shuffle();
+        imageSet.shuffle();
 
-        ImageSet[] imageSets = imageSet.split(65, 35);
+        ImageSet[] imageSets = imageSet.split(0.65, 0.35);
         int labelsCount = imageSet.getLabelsCount();
 
         LOGGER.info("Creating neural network...");
 
         // create convolutional neural network architecture
         ConvolutionalNetwork neuralNet = ConvolutionalNetwork.builder()
-                .addInputLayer(imageWidth, imageHeight)
-                .addConvolutionalLayer(5, 6)
+                .addInputLayer(imageWidth, imageHeight, 3)
+                .addConvolutionalLayer(3, 3, 3)
                 .addMaxPoolingLayer(2, 2)
-                .addConvolutionalLayer(5, 3)
-                .addMaxPoolingLayer(2, 2)
+//                .addConvolutionalLayer(3, 3, 6)
+//                .addMaxPoolingLayer(2, 2)
                 .addFullyConnectedLayer(30)
+                .addFullyConnectedLayer(20)
                 .addOutputLayer(labelsCount, ActivationType.SOFTMAX)
-                .hiddenActivationFunction(ActivationType.TANH)
+                .hiddenActivationFunction(ActivationType.RELU)
                 .lossFunction(LossType.CROSS_ENTROPY)
                 .randomSeed(123)
                 .build();
@@ -97,10 +96,12 @@ public class MnistTrainTest {
         // create a trainer and train network
         BackpropagationTrainer trainer = new BackpropagationTrainer(neuralNet);
         trainer.setLearningRate(0.01f)
-                .setMaxError(0.02f);
-//                .setBatchMode(true)
-//                .setBatchSize(32);
-        trainer.train(imageSets[0], imageSets[1]);
+                .setMomentum(0.9f)
+                .setMaxError(0.3f)
+                .setBatchMode(false)
+          //      .setBatchSize(32)
+                .setOptimizer(OptimizerType.MOMENTUM);
+        trainer.train(imageSets[0]);
 
         // Test trained network
         ClassifierEvaluator evaluator = new ClassifierEvaluator();
@@ -123,6 +124,8 @@ public class MnistTrainTest {
     }
 
     public static void main(String[] args) throws IOException {
-        (new MnistTrainTest()).run();
+        (new Mnist()).run();
     }
+
+
 }

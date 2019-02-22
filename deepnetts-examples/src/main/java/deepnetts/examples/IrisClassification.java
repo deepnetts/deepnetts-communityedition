@@ -21,10 +21,9 @@
  */
 package deepnetts.examples;
 
-import deepnetts.core.DeepNetts;
-import deepnetts.data.BasicDataSet;
 import deepnetts.data.DataSet;
-import deepnetts.eval.ClassifierEvaluator;
+import deepnetts.data.BasicDataSet;
+import deepnetts.data.DataSets;
 import deepnetts.eval.PerformanceMeasure;
 import deepnetts.net.FeedForwardNetwork;
 import deepnetts.net.layers.activation.ActivationType;
@@ -32,62 +31,44 @@ import deepnetts.net.loss.LossType;
 import deepnetts.net.train.BackpropagationTrainer;
 import deepnetts.net.train.opt.OptimizerType;
 import deepnetts.util.DeepNettsException;
-import java.io.File;
 import java.io.IOException;
-import java.util.Map;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  * Iris Classification Problem. This example is using Softmax activation in
- * output addLayer and Cross Entropy Loss function.
+ * output layer and Cross Entropy Loss function. Overfits the iris data set
  *
- * @author Zoran Sevarac
+ * @author Zoran Sevarac <zoran.sevarac@deepnetts.com>
  */
-public class IrisClassificationCE2 {
-
-    private static final Logger LOGGER = LogManager.getLogger(DeepNetts.class.getName());
+public class IrisClassification {
 
     public static void main(String[] args) throws DeepNettsException, IOException {
-        // load iris data  set
-        DataSet dataSet = BasicDataSet.fromCSVFile(new File("datasets/iris_data_normalised.txt"), 4, 3, ",");
-        dataSet.shuffle(); // do the shuffling inside the split method automaticaly! how to specify random seed for shuffling?
-        DataSet[] dataSets = dataSet.split(65, 35);
-        dataSet.shuffle();
 
-        // dataSet.normalize();// Norm.MAX Norm.RANGE Norm.ZSCORE, i overload gde kao parametar prihvata normalizator?
+        // load iris data  set
+        DataSet dataSet = DataSets.readCsv("datasets/iris_data_normalised.txt", 4, 3, true);
+        // split loaded data into 70 : 30% ratio
+        DataSet[] trainTestSet = dataSet.split(0.7, 0.3);
 
         // create instance of multi addLayer percetpron using builder
         FeedForwardNetwork neuralNet = FeedForwardNetwork.builder()
                 .addInputLayer(4)
-                .addFullyConnectedLayer(9, ActivationType.TANH)
+                .addFullyConnectedLayer(9, ActivationType.TANH) // 20 hid 28 epochs, 10 51, 30 hid, 35 epochs, 15 hid 46 epochs, 5 hid 62 epochs, 3 hid 41 epochs
                 .addOutputLayer(3, ActivationType.SOFTMAX)
                 .lossFunction(LossType.CROSS_ENTROPY)
-                .randomSeed(123).
-                build();
+                .randomSeed(123)
+                .build();
 
         // create and configure instanceof backpropagation trainer
-        BackpropagationTrainer trainer = new BackpropagationTrainer(neuralNet);
-        trainer.setMaxError(0.03f);
-        trainer.setLearningRate(0.1f);
+        BackpropagationTrainer trainer = neuralNet.getTrainer();
+        trainer.setMaxError(0.01f);
+        trainer.setLearningRate(0.01f);
         trainer.setBatchMode(false);
-        trainer.setMomentum(0.9f);
+        trainer.setMomentum(0.5f);
         trainer.setOptimizer(OptimizerType.MOMENTUM);
         trainer.setMaxEpochs(10000);
-        trainer.train(dataSets[0]);
 
-        ClassifierEvaluator evaluator = new ClassifierEvaluator();
-        PerformanceMeasure pm = evaluator.evaluatePerformance(neuralNet, dataSets[1]);
-        LOGGER.info("------------------------------------------------");
-        LOGGER.info("Classification performance measure" + System.lineSeparator());
-        LOGGER.info(pm);
-        Map<String, PerformanceMeasure> byClass = evaluator.getPerformanceByClass();
-        byClass.entrySet().stream().forEach((entry) -> {
-            LOGGER.info("Class " + entry.getKey() + ":");
-            LOGGER.info(entry.getValue());
-            LOGGER.info("----------------");
-        });
-
+        neuralNet.train(trainTestSet[0]);
+        PerformanceMeasure pe = neuralNet.test(trainTestSet[1]);
+        System.out.println(pe);
     }
 
 }

@@ -59,6 +59,7 @@ public class XorExample {
 
     public static DataSet xorDataSet() {
         DataSet dataSet = new BasicDataSet(2, 1);
+        dataSet.setColumnNames(new String[]{"x", "y", "out"});
 
         DataSetItem item1 = new BasicDataSetItem(new float[]{0, 0}, new float[]{0});
         dataSet.add(item1);
