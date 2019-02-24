@@ -46,7 +46,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Convolutional neural network
+ * Convolutional neural network is an extension of feed forward network, which can
+ * include  2D and 3D adaptive preprocessing layers (Convolutional and MaxPooling layer),
+ * which specialized to learn to recognize features in images. Images are fed as 3-dimensional tensors.
+ * Although primary used for images, they can also be applied to other types of
+ * multidimensional problems.
+ *
+ * @see ConvolutionalLayer
+ * @see MaxPoolingLayer
+ * @see BackpropagationTrainer
  *
  * @author Zoran Sevarac
  */

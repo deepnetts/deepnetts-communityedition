@@ -31,9 +31,10 @@ import java.util.Arrays;
 import deepnetts.net.layers.activation.ActivationFunction;
 
 /**
- * This class represents output layer with sigmoid output function by default.
+ * Output layer of a neural network, which gives the final output of a network.
+ * It is always the last layer in the network.
  *
- * @author zoran
+ * @author Zoran Sevarac
  */
 public class OutputLayer extends AbstractLayer {
 
@@ -41,6 +42,13 @@ public class OutputLayer extends AbstractLayer {
     protected final String[] labels;
     protected LossType lossType;
 
+    /**
+     * Creates an instance of output layer with specified width (number of outputs)
+     * and sigmoid activation function by default.
+     * Outputs are labeled using generic names "Output1, 2, 3..."
+     *
+     * @param width layer width which represents number of network outputs
+     */
     public OutputLayer(int width) {
         this.width = width;
         this.height = 1;
@@ -56,6 +64,14 @@ public class OutputLayer extends AbstractLayer {
         this.activation = ActivationFunction.create(ActivationType.SIGMOID);
     }
 
+    /**
+     * Creates an instance of output layer with specified width (number of outputs)
+     * and specified activation function.
+     * Outputs are labeled using generic names "Output1, 2, 3..."
+     *
+     * @param width layer width which represents number of network outputs
+     * @param actType activation function
+     */
     public OutputLayer(int width, ActivationType actType) {
         this.width = width;
         this.height = 1;
@@ -71,18 +87,26 @@ public class OutputLayer extends AbstractLayer {
         this.activation = ActivationFunction.create(actType);
     }
 
-    public OutputLayer(String[] labels) {
-        this.width = labels.length;
+    /**
+     * Creates an instance of output layer with specified width (number of outputs)
+     * which corresponds to number of labels and sigmoid activation function by default.
+     * Outputs are labeled with strings specified in labels parameter
+     *
+     * @param outputLabels labels for network's outputs
+     */
+    public OutputLayer(String[] outputLabels) {
+        this.width = outputLabels.length;
         this.height = 1;
         this.depth = 1;
-        this.labels = labels;
+        this.labels = outputLabels;
         setActivationType(ActivationType.SIGMOID);
         this.activation = ActivationFunction.create(ActivationType.SIGMOID);
     }
 
-    public OutputLayer(String[] labels, ActivationType activationFunction) {
+    public OutputLayer(String[] labels, ActivationType actType) {
         this(labels);
-        setActivationType(activationFunction);
+        setActivationType(actType);
+
     }
 
     public final void setOutputErrors(final float[] outputErrors) {
@@ -126,8 +150,8 @@ public class OutputLayer extends AbstractLayer {
      */
     @Override
     public void forward() {
-        outputs.copyFrom(biases);  
-        for (int outCol = 0; outCol < outputs.getCols(); outCol++) { 
+        outputs.copyFrom(biases);
+        for (int outCol = 0; outCol < outputs.getCols(); outCol++) {
             for (int inCol = 0; inCol < inputs.getCols(); inCol++) {
                 outputs.add(outCol, inputs.get(inCol) * weights.get(inCol, outCol));
             }
@@ -150,8 +174,8 @@ public class OutputLayer extends AbstractLayer {
 
             if (lossType == LossType.MEAN_SQUARED_ERROR) {
                 deltas.set(dCol, outputErrors[dCol] * ActivationFunctions.prime(activationType, outputs.get(dCol)));
-            } else if (activationType == ActivationType.SIGMOID && lossType == LossType.CROSS_ENTROPY) { 
-                deltas.set(dCol, outputErrors[dCol]); 
+            } else if (activationType == ActivationType.SIGMOID && lossType == LossType.CROSS_ENTROPY) {
+                deltas.set(dCol, outputErrors[dCol]);
             }
 
             for (int inCol = 0; inCol < inputs.getCols(); inCol++) {
@@ -170,7 +194,7 @@ public class OutputLayer extends AbstractLayer {
      */
     @Override
     public void applyWeightChanges() {
-        if (batchMode) { 
+        if (batchMode) {
             deltaWeights.div(batchSize);
             Tensor.div(deltaBiases, batchSize);
         }

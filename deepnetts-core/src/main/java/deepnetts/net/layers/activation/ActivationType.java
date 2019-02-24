@@ -1,7 +1,7 @@
-/**  
- *  DeepNetts is pure Java Deep Learning Library with support for Backpropagation 
+/**
+ *  DeepNetts is pure Java Deep Learning Library with support for Backpropagation
  *  based learning and image recognition.
- * 
+ *
  *  Copyright (C) 2017  Zoran Sevarac <sevarac@gmail.com>
  *
  *  This file is part of DeepNetts.
@@ -18,13 +18,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.package deepnetts.core;
  */
-    
+
 package deepnetts.net.layers.activation;
 
 /**
- * Activation function types
- * TODO: Should be generated automatically based on annotations on implementations @Activation
- * 
+ * Supported types of activation functions.
+ *
+ * @see ActivationFunction
  * @author Zoran Sevarac
  */
 public enum ActivationType {
@@ -32,6 +32,6 @@ public enum ActivationType {
     SIGMOID,
     TANH,
     RELU,
-    LEAKY_RELU, 
+    LEAKY_RELU,
     SOFTMAX;
 }

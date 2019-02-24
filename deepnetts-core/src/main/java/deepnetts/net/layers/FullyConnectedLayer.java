@@ -30,21 +30,25 @@ import deepnetts.util.Tensor;
 import java.util.Arrays;
 import java.util.logging.Logger;
 import deepnetts.net.layers.activation.ActivationFunction;
+import deepnetts.util.DeepNettsException;
 
 /**
- * Fully connected layer has a single row of neurons connected to all neurons in
+ * Fully connected layer is used as hidden layer in the neural network, and it
+ * has a single row of units/nodes/neurons connected to all neurons in
  * previous and next layer.
+ * Previous connected layer can be input fully connected, convolutional or max pooling layer,
+ * while next layer can be fully connected or output layer.
+ * This layer calculates weighted sum of outputs from the previous layers, and applies activation function to that sum.
  *
- * Next layer can be fully connected or output Previous layer can be fully
- * connected, input, convolutional or max pooling
- *
+ * @see ActivationType
+ * @see ActivationFunction
  * @author Zoran Sevarac
  */
 public final class FullyConnectedLayer extends AbstractLayer {
 
     private static Logger LOG = Logger.getLogger(DeepNetts.class.getName());
 
-    /**
+     /**
      * Creates an instance of fully connected layer with specified width (number
      * of neurons) and sigmoid activation function.
      *
@@ -54,37 +58,43 @@ public final class FullyConnectedLayer extends AbstractLayer {
         this.width = width;
         this.height = 1;
         this.depth = 1;
-        this.activationType = ActivationType.SIGMOID;
-        this.activation = ActivationFunction.create(activationType);
+
+        setActivationType(ActivationType.SIGMOID);
     }
 
     /**
      * Creates an instance of fully connected layer with specified width (number
-     * of neurons) and activation function.
+     * of neurons) and activation function type.
      *
      * @param width layer width / number of neurons in this layer
-     * @param activationFunction activation function to use with this layer
+     * @param actType activation function type to use in this layer
      * @see ActivationFunctions
      */
     public FullyConnectedLayer(int width, ActivationType actType) {
         this(width);
-        this.activationType = actType;
-        this.activation = ActivationFunction.create(actType);
+        setActivationType(actType);
     }
 
     /**
-     * Creates all data strucutres: inputs, weights, biases, outputs, deltas,
+     * Creates all internal data structures: inputs, weights, biases, outputs, deltas,
      * deltaWeights, deltaBiases prevDeltaWeights, prevDeltaBiases. Init weights
-     * and biases. This method is called from network builder during
-     * initialisation
+     * and biases. This method is called from network builder during initialization
      */
     @Override
     public void init() {
+        // check prev and next layers and throw exception if its illegall architecture
+        if (!(prevLayer instanceof InputLayer ||
+            prevLayer instanceof MaxPoolingLayer ||
+            prevLayer instanceof ConvolutionalLayer)) throw new DeepNettsException("Bad network architecture! Fully Connected Layer can be connected only to Input, Maxpooling or Convolutional layer as previous layer.");
+
+        if (!(nextLayer instanceof FullyConnectedLayer ||
+            nextLayer instanceof OutputLayer)) throw new DeepNettsException("Bad network architecture! Fully Connected Layer can only be connected only to Fully Connected Layer or Output layer as next layer");
+
         inputs = prevLayer.outputs;
         outputs = new Tensor(width);
         deltas = new Tensor(width);
 
-        if (prevLayer instanceof FullyConnectedLayer) { 
+        if (prevLayer instanceof FullyConnectedLayer) {
             weights = new Tensor(prevLayer.width, width);
             deltaWeights = new Tensor(prevLayer.width, width);
             gradients = new Tensor(prevLayer.width, width);
@@ -116,11 +126,11 @@ public final class FullyConnectedLayer extends AbstractLayer {
                     outputs.add(outCol, inputs.get(inCol) * weights.get(inCol, outCol));    // and add weighted sum to outputs
                 }
 
-                //outputs.set(outCol, activation.getValue(outputs.get(outCol)));                                 
+                //outputs.set(outCol, activation.getValue(outputs.get(outCol)));
             }
             outputs.apply(activation::getValue);
         } // if previous layer is MaxPooling, Convolutional or input layer (2D or 3D) - TODO: posto je povezanost svi sa svima ovo mozda moze i kao 1d na 1d niz, verovatno je efikasnije
-        else if ((prevLayer instanceof MaxPoolingLayer) || (prevLayer instanceof ConvolutionalLayer) || (prevLayer instanceof InputLayer)) { 
+        else if ((prevLayer instanceof MaxPoolingLayer) || (prevLayer instanceof ConvolutionalLayer) || (prevLayer instanceof InputLayer)) {
             outputs.copyFrom(biases);                                             // first use (add) biases to all outputs
             for (int outCol = 0; outCol < outputs.getCols(); outCol++) {          // for all neurons/outputs in this layer
                 for (int inDepth = 0; inDepth < inputs.getDepth(); inDepth++) {   // iterate depth from prev/input layer
@@ -165,7 +175,7 @@ public final class FullyConnectedLayer extends AbstractLayer {
                     gradients.set(inCol, deltaCol, grad);
 
                     float deltaWeight = 0;
-                    
+
                     switch (optimizer) {
                         case SGD:
                             deltaWeight = Optimizers.sgd(learningRate, grad);
@@ -189,12 +199,12 @@ public final class FullyConnectedLayer extends AbstractLayer {
                 || (prevLayer instanceof ConvolutionalLayer)
                 || (prevLayer instanceof MaxPoolingLayer)) {
 
-            for (int deltaCol = 0; deltaCol < deltas.getCols(); deltaCol++) { 
-                for (int inDepth = 0; inDepth < inputs.getDepth(); inDepth++) { 
+            for (int deltaCol = 0; deltaCol < deltas.getCols(); deltaCol++) {
+                for (int inDepth = 0; inDepth < inputs.getDepth(); inDepth++) {
                     for (int inRow = 0; inRow < inputs.getRows(); inRow++) {
                         for (int inCol = 0; inCol < inputs.getCols(); inCol++) {
                             final float grad = deltas.get(deltaCol) * inputs.get(inRow, inCol, inDepth);
-                            gradients.set(inCol, inRow, inDepth, grad); 
+                            gradients.set(inCol, inRow, inDepth, grad);
 
                             float deltaWeight = 0;
                             switch (optimizer) {

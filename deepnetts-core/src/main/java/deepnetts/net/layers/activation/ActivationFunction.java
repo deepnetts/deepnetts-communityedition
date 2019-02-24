@@ -25,10 +25,18 @@ package deepnetts.net.layers.activation;
 import deepnetts.util.DeepNettsException;
 
 /**
- * Interface for all activaton functions used in layers.
- * 
- * @see https://en.wikipedia.org/wiki/Activation_function
- * @author zoran
+ * Common base interface for all activation functions used in layers.
+ * Classes implementing this interface should provide methods for calculating
+ * value and first derivative of the activation function.
+ * Activation function performs non-linear transformation of its input
+ * before its sent to layer output.
+ * First derivative of a function shows how fast and in what direction function
+ * is changing if its input changes, and it is used by training algorithm.
+ *
+ * For more see <a href="https://en.wikipedia.org/wiki/Activation_function">https://en.wikipedia.org/wiki/Activation_function</a>
+ *
+ * @see ActivationType
+ * @author Zoran Sevarac
  */
 public interface ActivationFunction {
 
@@ -39,7 +47,7 @@ public interface ActivationFunction {
      */
     public float getValue(float x); // apply(float x)
 
-    
+
     /**
      * Returns the first derivative of activation function for specified output y
      * @param y output of activation function
@@ -47,12 +55,14 @@ public interface ActivationFunction {
      */
     public float getPrime(float y);
 
-    
-    
+
+
     /**
      * Creates and returns specified type of activation function.
+     * A factory method for creating activation functions;
+     *
      * @param type type of the activation function
-     * 
+     *
      * @return returns instance of specified activation function type
      */
     public static ActivationFunction create(ActivationType type) {
@@ -62,7 +72,7 @@ public interface ActivationFunction {
             case RELU:
                 return new Relu();
             case LEAKY_RELU:
-                return new LeakyRelu();                
+                return new LeakyRelu();
             case SIGMOID:
                 return new Sigmoid();
             case TANH:
@@ -71,10 +81,5 @@ public interface ActivationFunction {
                 throw new DeepNettsException("Unknown activation function:" + type);
         }
     }
-
-    public static ActivationType LINEAR = ActivationType.LINEAR;
-    public static ActivationType RELU = ActivationType.RELU;
-    public static ActivationType SIGMOID = ActivationType.SIGMOID;
-    public static ActivationType TANH = ActivationType.TANH;
 
 }

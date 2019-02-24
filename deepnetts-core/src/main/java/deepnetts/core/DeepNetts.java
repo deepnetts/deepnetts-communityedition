@@ -31,17 +31,16 @@ import java.util.Properties;
 public final class DeepNetts {
 
     private static DeepNetts instance;
-    
+
     /**
-     * Configuration of the current deep netts working environment 
-     * 
+     * Configuration of the current deep netts working environment
+     *
      */
     private Properties prop;
 
     private DeepNetts() {
-        // load properties from META-INF file that should be generated during the build
         prop = new Properties();
-        prop.put("version", "1.0 Community Edition");
+        prop.put("version", "1.1 Community Edition");
         prop.put("license", "GPL with CPE");
     }
 
@@ -56,9 +55,9 @@ public final class DeepNetts {
     public String version() {
         return prop.getProperty("version");
     }
-    
+
     public Properties getProperties() {
         return prop;
     }
-    
+
 }

@@ -21,6 +21,19 @@
  */
 package deepnetts.net.train.opt;
 
+/**
+ * Supported commonly used optimization methods used by back-propagation training algorithm.
+ *
+ * @author Zoran Sevarac
+ */
 public enum OptimizerType {
-    SGD, MOMENTUM, ADAGRAD, RMSPROP, ADADELTA, ADAM; // NESTEROV, NEWTON
+    /**
+     * Stochastic Gradient Descent, a basic type of neural network optimization algorithm.
+     */
+    SGD,
+    MOMENTUM,
+    ADAGRAD,
+    RMSPROP,
+    ADADELTA,
+    ADAM;
 }

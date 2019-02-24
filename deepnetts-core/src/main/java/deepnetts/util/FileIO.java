@@ -183,7 +183,7 @@ public class FileIO {
 
         json.put("networkType", NetworkType.Of(nnet.getClass()));
         json.put("layers", layers);
-        json.put("lossFunction", LossType.Of(nnet.getLossFunction().getClass()));
+        json.put("lossFunction", LossType.of(nnet.getLossFunction().getClass()));
 
         return json.toString();
     }

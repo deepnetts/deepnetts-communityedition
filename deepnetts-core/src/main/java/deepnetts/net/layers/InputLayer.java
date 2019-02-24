@@ -24,21 +24,12 @@ package deepnetts.net.layers;
 import deepnetts.util.Tensor;
 
 /**
- * Input layer for convolutional network
- *
- * TODO: move padding to next layer!!!
+ * Input layer in neural network, which accepts external input, and sends it to next layer in a network.
+ * It is typically the first layer in the network.  Input can be 1D, 2D or 3D vectors/tensors of float values.
  *
  * @author Zoran Sevarac
  */
 public class InputLayer extends AbstractLayer { // data Layer
-
-    /**
-     * Padding parameter specifies empty border around image. Set from padding
-     * parameter from the following Convolutional layer
-     *
-     * @see initInNetwork#init method
-     */
-    private int padding = 0; // mozda je bolje da se ovde odmah navode dimenzije sa paddingom ??? ovo je malo nabudzeno???
 
     /**
      * Creates input layer with specified width, height, and depth (number of

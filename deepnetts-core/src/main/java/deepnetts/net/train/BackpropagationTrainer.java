@@ -45,10 +45,14 @@ import org.apache.logging.log4j.LogManager;
 
 /**
  * Backpropagation training algorithm for feed forward and convolutional neural networks.
+ * Backpropagation is a supervised machine learning algorithm which iteratively
+ * reduces prediction error, by looking for the minimum of loss function.
  *
  * @see FeedForwardNetwork
  * @see ConvolutionalNetwork
- * @author Zoran Sevarac
+ * @see LossFunction
+ * @see OptimizerType
+ * @author Zoran Sevarac <zoran.sevarac@deepnetts.com>
  */
 public class BackpropagationTrainer implements Trainer, Serializable {
 
