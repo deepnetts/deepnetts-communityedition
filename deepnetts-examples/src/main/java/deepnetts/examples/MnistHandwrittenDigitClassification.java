@@ -45,7 +45,7 @@ import org.apache.logging.log4j.Logger;
  *
  * @author Zoran Sevarac <zoran.sevarac@deepnetts.com>
  */
-public class Mnist {
+public class MnistHandwrittenDigitClassification {
 
     int imageWidth = 28;
     int imageHeight = 28;
@@ -120,7 +120,7 @@ public class Mnist {
     }
 
     public static void main(String[] args) throws IOException {
-        (new Mnist()).run();
+        (new MnistHandwrittenDigitClassification()).run();
     }
 
 
