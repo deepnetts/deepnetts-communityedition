@@ -84,7 +84,7 @@ public abstract class AbstractLayer implements Layer, Serializable {
     protected Tensor deltaWeights;
 
     protected Tensor gradients;
-    
+
     protected ActivationFunction activation;
 
     /**
@@ -223,8 +223,8 @@ public abstract class AbstractLayer implements Layer, Serializable {
     public void setActivation(ActivationFunction activation) {
         this.activation = activation;
     }
-    
-    
+
+
 
     public float getLearningRate() {
         return learningRate;
@@ -240,7 +240,7 @@ public abstract class AbstractLayer implements Layer, Serializable {
 //        in.defaultReadObject();
 //
 //    }
-    
+
     public boolean isBatchMode() {
         return batchMode;
     }
@@ -279,6 +279,7 @@ public abstract class AbstractLayer implements Layer, Serializable {
 
     public final void setActivationType(ActivationType activationType) {
         this.activationType = activationType;
+        this.activation = ActivationFunction.create(activationType);
     }
 
     public float getL1Norm() {
