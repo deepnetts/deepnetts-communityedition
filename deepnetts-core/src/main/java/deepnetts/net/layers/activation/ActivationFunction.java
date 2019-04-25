@@ -77,6 +77,8 @@ public interface ActivationFunction {
                 return new Sigmoid();
             case TANH:
                 return new Tanh();
+            case SOFTMAX:
+                return null;
             default:
                 throw new DeepNettsException("Unknown activation function:" + type);
         }
