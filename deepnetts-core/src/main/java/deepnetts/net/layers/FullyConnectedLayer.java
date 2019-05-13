@@ -84,6 +84,7 @@ public final class FullyConnectedLayer extends AbstractLayer {
     public void init() {
         // check prev and next layers and throw exception if its illegall architecture
         if (!(prevLayer instanceof InputLayer ||
+            prevLayer instanceof FullyConnectedLayer ||
             prevLayer instanceof MaxPoolingLayer ||
             prevLayer instanceof ConvolutionalLayer)) throw new DeepNettsException("Bad network architecture! Fully Connected Layer can be connected only to Input, Maxpooling or Convolutional layer as previous layer.");
 
