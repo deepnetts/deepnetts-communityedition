@@ -27,7 +27,7 @@ package deepnetts.net.layers;
  * @author Zoran Sevarac
  */
 public enum LayerType {
-    INPUT("INPUT"), CONVOLUTIONAL("CONVOLUTIONAL"), MAXPOOLING("MAXPOOLING"), DENSE("DENSE"), OUTPUT("OUTPUT");
+    INPUT("INPUT"), CONVOLUTIONAL("CONVOLUTIONAL"), MAXPOOLING("MAXPOOLING"), FULLY_CONNECTED("FULLY_CONNECTED"), OUTPUT("OUTPUT");
 
     private final String name;
 

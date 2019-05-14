@@ -156,7 +156,7 @@ public class FileIO {
                 layers.put(poolLayerJson);
             } else if (layer instanceof FullyConnectedLayer) {
                 JSONObject fullyConnLayerJson = new JSONObject();
-                fullyConnLayerJson.put("layerType", LayerType.DENSE);
+                fullyConnLayerJson.put("layerType", LayerType.FULLY_CONNECTED);
                 fullyConnLayerJson.put("width", layer.getWidth());
                 fullyConnLayerJson.put("activation", layer.getActivationType());
                 //fullyConnLayerJson.put("weights", layer.getWeights());
@@ -263,7 +263,7 @@ public class FileIO {
                         stride = layerObj.getInt("stride");
                         builder.addMaxPoolingLayer(filterWidth, filterHeight, stride);
                 break;
-                case DENSE :
+                case FULLY_CONNECTED :
                         width = layerObj.getInt("width");
                         activation = layerObj.getString("activation").toUpperCase();
                          if (layerObj.has("weights")) {
@@ -321,7 +321,7 @@ public class FileIO {
                         width = layerObj.getInt("width");
                         builder.addInputLayer(width);
                 break;
-                case DENSE :
+                case FULLY_CONNECTED :
                         width = layerObj.getInt("width");
                         activation = layerObj.getString("activation").toUpperCase();
                          if (layerObj.has("weights")) {
