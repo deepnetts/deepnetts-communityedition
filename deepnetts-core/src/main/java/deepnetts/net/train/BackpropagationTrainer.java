@@ -279,7 +279,7 @@ public class BackpropagationTrainer implements Trainer, Serializable {
 
             epochTime = endEpoch - startEpoch;
 
-            LOGGER.info("Epoch:" + epoch + ", Time:" + epochTime + "ms, TrainError:" + totalTrainingLoss + ", TestError:" + testLoss + ", TrainErrorChange:" + totalLossChange + ", Accuracy: "+accuracy); // EpochTime:"+epochTime + "ms,
+            LOGGER.info("Epoch:" + epoch + ", Time:" + epochTime + "ms, TrainError:" + totalTrainingLoss + ", TrainErrorChange:" + totalLossChange + ", Accuracy: "+accuracy); // EpochTime:"+epochTime + "ms,
 
             // maybe to trigger this with event
             if (saveTrainingWeights && epoch % saveTrainingWeightsEpochs == 0) {
