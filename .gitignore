@@ -4,3 +4,5 @@
 /deepnetts-license/target/
 /target/
 .DS_Store
+/*reduced*/
+*-reduced-pom*.xml

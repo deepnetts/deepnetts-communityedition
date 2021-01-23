@@ -21,12 +21,17 @@ take a look at [Deep Netts Professional Edition](https://www.deepnetts.com/produ
 
 ## Building and Running
 
+### Minimum requirements
+
+- Java 8 or above
+- Maven 3.5 or above
+
 ### Building
 
 Install the core libraries (jar files) into your local maven repository, while in the _repo root folder_, run the below:
 
 ```
-mvn install
+mvn clean install
 ```
 
 ### Running
@@ -36,6 +41,11 @@ To run the examples in the `deepnetts-examples` folder, run the below:
 ```
 cd deepnetts
 mvn exec:java -Dexec.mainClass=deepnetts.examples.[Class name]
+
+or 
+
+cd deepnetts
+java -cp target/deepnetts-examples-1.1-SNAPSHOT.jar deepnetts.examples.[Class name]
 ```
 
 Here is a list of `Class name`s to select from:
@@ -49,10 +59,23 @@ SweedenAutoInsurance
 XorExample
 ```
 
-For example:
+For example enter the `deepnetts-examples` folder:
+
+```
+cd deepnetts-examples
+```
+
+and then run one of these:
 
 ```
 mvn exec:java -Dexec.mainClass=deepnetts.examples.IrisClassification
 ```
+
+or 
+
+```
+java -cp target/deepnetts-examples-1.1-SNAPSHOT.jar deepnetts.examples.IrisClassification
+```
+
 
 will result in this [IrisClassification console output](deepnetts-examples/console-outputs/IrisClassification-example.log). You can find the console outputs of the other examples [here](./deepnetts-examples/console-outputs).
