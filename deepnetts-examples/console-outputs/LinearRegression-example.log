@@ -1,0 +1,38 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< deepnetts:deepnetts-examples >--------------------
+[INFO] Building deepnetts-examples 1.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- exec-maven-plugin:3.0.0:java (default-cli) @ deepnetts-examples ---
+------------------------------------------------------------------------
+TRAINING NEURAL NETWORK
+------------------------------------------------------------------------
+Epoch:1, Time:44ms, TrainError:0.08795781, TrainErrorChange:0.08795781, Accuracy: NaN
+Epoch:2, Time:1ms, TrainError:0.05001422, TrainErrorChange:0.05001422, Accuracy: NaN
+Epoch:3, Time:1ms, TrainError:0.029138632, TrainErrorChange:0.029138632, Accuracy: NaN
+Epoch:4, Time:1ms, TrainError:0.017602745, TrainErrorChange:0.017602745, Accuracy: NaN
+Epoch:5, Time:1ms, TrainError:0.01118233, TrainErrorChange:0.01118233, Accuracy: NaN
+Epoch:6, Time:1ms, TrainError:0.0075677442, TrainErrorChange:0.0075677442, Accuracy: NaN
+Epoch:7, Time:1ms, TrainError:0.0054956013, TrainErrorChange:0.0054956013, Accuracy: NaN
+Epoch:8, Time:0ms, TrainError:0.004274377, TrainErrorChange:0.004274377, Accuracy: NaN
+Epoch:9, Time:0ms, TrainError:0.003525217, TrainErrorChange:0.003525217, Accuracy: NaN
+Epoch:10, Time:0ms, TrainError:0.0030402828, TrainErrorChange:0.0030402828, Accuracy: NaN
+Epoch:11, Time:0ms, TrainError:0.0027053268, TrainErrorChange:0.0027053268, Accuracy: NaN
+Epoch:12, Time:1ms, TrainError:0.002457351, TrainErrorChange:0.002457351, Accuracy: NaN
+Epoch:13, Time:0ms, TrainError:0.0022614568, TrainErrorChange:0.0022614568, Accuracy: NaN
+Epoch:14, Time:1ms, TrainError:0.002098166, TrainErrorChange:0.002098166, Accuracy: NaN
+Epoch:15, Time:0ms, TrainError:0.0019564861, TrainErrorChange:0.0019564861, Accuracy: NaN
+
+TRAINING COMPLETED
+Total Training Time: 57ms
+------------------------------------------------------------------------
+MSE: 0.0037404667
+
+Predicted output for 0.2 :[0.34035164]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.124 s
+[INFO] Finished at: 2021-01-23T18:31:47Z
+[INFO] ------------------------------------------------------------------------

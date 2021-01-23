@@ -1,0 +1,50 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< deepnetts:deepnetts-examples >--------------------
+[INFO] Building deepnetts-examples 1.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- exec-maven-plugin:3.0.0:java (default-cli) @ deepnetts-examples ---
+Training convolutional network with MNIST data set
+Loading images...
+Could not find labels file: /Users/swami/git-repos/ai-ml-dl-stuff/deepnetts-communityedition/deepnetts-examples/D:\datasets\mnist\train\labels.txt
+java.io.FileNotFoundException: D:\datasets\mnist\train\labels.txt (No such file or directory)
+	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_252]
+	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_252]
+	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_252]
+	at java.io.FileReader.<init>(FileReader.java:72) ~[?:1.8.0_252]
+	at deepnetts.data.ImageSet.loadLabels(ImageSet.java:283) [deepnetts-core-ce-1.1-SNAPSHOT.jar:?]
+	at deepnetts.examples.MnistHandwrittenDigitClassification.run(MnistHandwrittenDigitClassification.java:65) [classes/:?]
+	at deepnetts.examples.MnistHandwrittenDigitClassification.main(MnistHandwrittenDigitClassification.java:123) [classes/:?]
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:254) [exec-maven-plugin-3.0.0.jar:?]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_252]
+[WARNING] 
+deepnetts.util.DeepNettsException: Could not find labels file: /Users/swami/git-repos/ai-ml-dl-stuff/deepnetts-communityedition/deepnetts-examples/D:\datasets\mnist\train\labels.txt
+    at deepnetts.data.ImageSet.loadLabels (ImageSet.java:295)
+    at deepnetts.examples.MnistHandwrittenDigitClassification.run (MnistHandwrittenDigitClassification.java:65)
+    at deepnetts.examples.MnistHandwrittenDigitClassification.main (MnistHandwrittenDigitClassification.java:123)
+    at org.codehaus.mojo.exec.ExecJavaMojo$1.run (ExecJavaMojo.java:254)
+    at java.lang.Thread.run (Thread.java:748)
+Caused by: java.io.FileNotFoundException: D:\datasets\mnist\train\labels.txt (No such file or directory)
+    at java.io.FileInputStream.open0 (Native Method)
+    at java.io.FileInputStream.open (FileInputStream.java:195)
+    at java.io.FileInputStream.<init> (FileInputStream.java:138)
+    at java.io.FileReader.<init> (FileReader.java:72)
+    at deepnetts.data.ImageSet.loadLabels (ImageSet.java:283)
+    at deepnetts.examples.MnistHandwrittenDigitClassification.run (MnistHandwrittenDigitClassification.java:65)
+    at deepnetts.examples.MnistHandwrittenDigitClassification.main (MnistHandwrittenDigitClassification.java:123)
+    at org.codehaus.mojo.exec.ExecJavaMojo$1.run (ExecJavaMojo.java:254)
+    at java.lang.Thread.run (Thread.java:748)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.339 s
+[INFO] Finished at: 2021-01-23T18:32:38Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:3.0.0:java (default-cli) on project deepnetts-examples: An exception occured while executing the Java class. Could not find labels file: /Users/swami/git-repos/ai-ml-dl-stuff/deepnetts-communityedition/deepnetts-examples/D:\datasets\mnist\train\labels.txt: D:\datasets\mnist\train\labels.txt (No such file or directory) -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
