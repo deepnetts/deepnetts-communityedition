@@ -1,5 +1,7 @@
 # Deep Netts Community Edition
 
+[![GPL 3.0 with CPE](https://img.shields.io/badge/License-GNU%203.0%20with%20CPE-blue.svg)](COPYING)| ![deepnetts-examples-are-working](https://github.com/neomatrix369/deepnetts-communityedition/workflows/deepnetts-examples-are-working/badge.svg)
+
 To be able to use Deep Netts in your Maven based Java project, add the following dependency into dependencies section of your *pom.xml* file:
 
         <dependency>
