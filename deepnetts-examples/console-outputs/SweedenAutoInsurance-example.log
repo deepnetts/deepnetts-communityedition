@@ -1,0 +1,24 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< deepnetts:deepnetts-examples >--------------------
+[INFO] Building deepnetts-examples 1.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- exec-maven-plugin:3.0.0:java (default-cli) @ deepnetts-examples ---
+------------------------------------------------------------------------
+TRAINING NEURAL NETWORK
+------------------------------------------------------------------------
+Epoch:1, Time:112ms, TrainError:0.009669364, TrainErrorChange:0.009669364, Accuracy: NaN
+
+TRAINING COMPLETED
+Total Training Time: 118ms
+------------------------------------------------------------------------
+MSE: 0.014770269
+
+[0.20700344]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.329 s
+[INFO] Finished at: 2021-01-23T18:33:05Z
+[INFO] ------------------------------------------------------------------------

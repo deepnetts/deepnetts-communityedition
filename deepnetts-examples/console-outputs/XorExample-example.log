@@ -1,0 +1,114 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< deepnetts:deepnetts-examples >--------------------
+[INFO] Building deepnetts-examples 1.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- exec-maven-plugin:3.0.0:java (default-cli) @ deepnetts-examples ---
+------------------------------------------------------------------------
+TRAINING NEURAL NETWORK
+------------------------------------------------------------------------
+Epoch:1, Time:44ms, TrainError:0.15257195, TrainErrorChange:0.15257195, Accuracy: 0.5
+Epoch:2, Time:0ms, TrainError:0.14545414, TrainErrorChange:0.14545414, Accuracy: 0.5
+Epoch:3, Time:0ms, TrainError:0.1409238, TrainErrorChange:0.1409238, Accuracy: 0.75
+Epoch:4, Time:1ms, TrainError:0.13810168, TrainErrorChange:0.13810168, Accuracy: 0.75
+Epoch:5, Time:0ms, TrainError:0.13632321, TrainErrorChange:0.13632321, Accuracy: 0.75
+Epoch:6, Time:0ms, TrainError:0.13512355, TrainErrorChange:0.13512355, Accuracy: 0.75
+Epoch:7, Time:0ms, TrainError:0.13422777, TrainErrorChange:0.13422777, Accuracy: 0.75
+Epoch:8, Time:1ms, TrainError:0.13349265, TrainErrorChange:0.13349265, Accuracy: 0.75
+Epoch:9, Time:0ms, TrainError:0.1328443, TrainErrorChange:0.1328443, Accuracy: 0.75
+Epoch:10, Time:0ms, TrainError:0.1322412, TrainErrorChange:0.1322412, Accuracy: 0.75
+Epoch:11, Time:0ms, TrainError:0.13165665, TrainErrorChange:0.13165665, Accuracy: 0.75
+Epoch:12, Time:0ms, TrainError:0.13107175, TrainErrorChange:0.13107175, Accuracy: 0.75
+Epoch:13, Time:0ms, TrainError:0.1304721, TrainErrorChange:0.1304721, Accuracy: 0.75
+Epoch:14, Time:0ms, TrainError:0.12984651, TrainErrorChange:0.12984651, Accuracy: 0.75
+Epoch:15, Time:0ms, TrainError:0.12918614, TrainErrorChange:0.12918614, Accuracy: 0.75
+Epoch:16, Time:1ms, TrainError:0.12848412, TrainErrorChange:0.12848412, Accuracy: 0.75
+Epoch:17, Time:0ms, TrainError:0.12773511, TrainErrorChange:0.12773511, Accuracy: 0.75
+Epoch:18, Time:0ms, TrainError:0.12693533, TrainErrorChange:0.12693533, Accuracy: 0.75
+Epoch:19, Time:1ms, TrainError:0.12608224, TrainErrorChange:0.12608224, Accuracy: 0.75
+Epoch:20, Time:0ms, TrainError:0.12517457, TrainErrorChange:0.12517457, Accuracy: 0.75
+Epoch:21, Time:0ms, TrainError:0.124212295, TrainErrorChange:0.124212295, Accuracy: 0.75
+Epoch:22, Time:0ms, TrainError:0.12319651, TrainErrorChange:0.12319651, Accuracy: 0.75
+Epoch:23, Time:0ms, TrainError:0.122129515, TrainErrorChange:0.122129515, Accuracy: 0.75
+Epoch:24, Time:0ms, TrainError:0.12101464, TrainErrorChange:0.12101464, Accuracy: 0.75
+Epoch:25, Time:1ms, TrainError:0.11985604, TrainErrorChange:0.11985604, Accuracy: 0.75
+Epoch:26, Time:0ms, TrainError:0.11865859, TrainErrorChange:0.11865859, Accuracy: 0.75
+Epoch:27, Time:0ms, TrainError:0.11742768, TrainErrorChange:0.11742768, Accuracy: 0.75
+Epoch:28, Time:0ms, TrainError:0.11616873, TrainErrorChange:0.11616873, Accuracy: 0.75
+Epoch:29, Time:0ms, TrainError:0.11488713, TrainErrorChange:0.11488713, Accuracy: 0.75
+Epoch:30, Time:0ms, TrainError:0.11358777, TrainErrorChange:0.11358777, Accuracy: 0.75
+Epoch:31, Time:0ms, TrainError:0.11227484, TrainErrorChange:0.11227484, Accuracy: 0.75
+Epoch:32, Time:1ms, TrainError:0.11095154, TrainErrorChange:0.11095154, Accuracy: 0.75
+Epoch:33, Time:0ms, TrainError:0.10961988, TrainErrorChange:0.10961988, Accuracy: 0.75
+Epoch:34, Time:1ms, TrainError:0.108280644, TrainErrorChange:0.108280644, Accuracy: 0.75
+Epoch:35, Time:0ms, TrainError:0.10693324, TrainErrorChange:0.10693324, Accuracy: 0.75
+Epoch:36, Time:0ms, TrainError:0.105575725, TrainErrorChange:0.105575725, Accuracy: 0.75
+Epoch:37, Time:0ms, TrainError:0.104204744, TrainErrorChange:0.104204744, Accuracy: 0.75
+Epoch:38, Time:0ms, TrainError:0.10281576, TrainErrorChange:0.10281576, Accuracy: 0.75
+Epoch:39, Time:1ms, TrainError:0.10140306, TrainErrorChange:0.10140306, Accuracy: 0.75
+Epoch:40, Time:0ms, TrainError:0.099959806, TrainErrorChange:0.099959806, Accuracy: 0.75
+Epoch:41, Time:0ms, TrainError:0.09847826, TrainErrorChange:0.09847826, Accuracy: 0.75
+Epoch:42, Time:0ms, TrainError:0.09694977, TrainErrorChange:0.09694977, Accuracy: 0.75
+Epoch:43, Time:1ms, TrainError:0.09536514, TrainErrorChange:0.09536514, Accuracy: 0.75
+Epoch:44, Time:0ms, TrainError:0.09371449, TrainErrorChange:0.09371449, Accuracy: 0.75
+Epoch:45, Time:1ms, TrainError:0.09198767, TrainErrorChange:0.09198767, Accuracy: 0.75
+Epoch:46, Time:0ms, TrainError:0.09017444, TrainErrorChange:0.09017444, Accuracy: 0.75
+Epoch:47, Time:0ms, TrainError:0.088264614, TrainErrorChange:0.088264614, Accuracy: 0.75
+Epoch:48, Time:1ms, TrainError:0.08624867, TrainErrorChange:0.08624867, Accuracy: 0.75
+Epoch:49, Time:0ms, TrainError:0.08411804, TrainErrorChange:0.08411804, Accuracy: 0.75
+Epoch:50, Time:0ms, TrainError:0.08186575, TrainErrorChange:0.08186575, Accuracy: 0.75
+Epoch:51, Time:0ms, TrainError:0.07948704, TrainErrorChange:0.07948704, Accuracy: 1.0
+Epoch:52, Time:1ms, TrainError:0.07698024, TrainErrorChange:0.07698024, Accuracy: 1.0
+Epoch:53, Time:0ms, TrainError:0.07434744, TrainErrorChange:0.07434744, Accuracy: 1.0
+Epoch:54, Time:0ms, TrainError:0.07159523, TrainErrorChange:0.07159523, Accuracy: 1.0
+Epoch:55, Time:0ms, TrainError:0.06873537, TrainErrorChange:0.06873537, Accuracy: 1.0
+Epoch:56, Time:0ms, TrainError:0.06578483, TrainErrorChange:0.06578483, Accuracy: 1.0
+Epoch:57, Time:0ms, TrainError:0.062765814, TrainErrorChange:0.062765814, Accuracy: 1.0
+Epoch:58, Time:0ms, TrainError:0.059704926, TrainErrorChange:0.059704926, Accuracy: 1.0
+Epoch:59, Time:0ms, TrainError:0.05663187, TrainErrorChange:0.05663187, Accuracy: 1.0
+Epoch:60, Time:0ms, TrainError:0.053578053, TrainErrorChange:0.053578053, Accuracy: 1.0
+Epoch:61, Time:0ms, TrainError:0.050574385, TrainErrorChange:0.050574385, Accuracy: 1.0
+Epoch:62, Time:0ms, TrainError:0.047649756, TrainErrorChange:0.047649756, Accuracy: 1.0
+Epoch:63, Time:0ms, TrainError:0.04482919, TrainErrorChange:0.04482919, Accuracy: 1.0
+Epoch:64, Time:0ms, TrainError:0.042132914, TrainErrorChange:0.042132914, Accuracy: 1.0
+Epoch:65, Time:0ms, TrainError:0.039575767, TrainErrorChange:0.039575767, Accuracy: 1.0
+Epoch:66, Time:0ms, TrainError:0.037167206, TrainErrorChange:0.037167206, Accuracy: 1.0
+Epoch:67, Time:0ms, TrainError:0.034911655, TrainErrorChange:0.034911655, Accuracy: 1.0
+Epoch:68, Time:0ms, TrainError:0.03280936, TrainErrorChange:0.03280936, Accuracy: 1.0
+Epoch:69, Time:0ms, TrainError:0.030857129, TrainErrorChange:0.030857129, Accuracy: 1.0
+Epoch:70, Time:0ms, TrainError:0.029049262, TrainErrorChange:0.029049262, Accuracy: 1.0
+Epoch:71, Time:0ms, TrainError:0.02737836, TrainErrorChange:0.02737836, Accuracy: 1.0
+Epoch:72, Time:0ms, TrainError:0.025835942, TrainErrorChange:0.025835942, Accuracy: 1.0
+Epoch:73, Time:0ms, TrainError:0.024413068, TrainErrorChange:0.024413068, Accuracy: 1.0
+Epoch:74, Time:0ms, TrainError:0.023100661, TrainErrorChange:0.023100661, Accuracy: 1.0
+Epoch:75, Time:0ms, TrainError:0.021889834, TrainErrorChange:0.021889834, Accuracy: 1.0
+Epoch:76, Time:0ms, TrainError:0.02077211, TrainErrorChange:0.02077211, Accuracy: 1.0
+Epoch:77, Time:0ms, TrainError:0.019739471, TrainErrorChange:0.019739471, Accuracy: 1.0
+Epoch:78, Time:0ms, TrainError:0.018784476, TrainErrorChange:0.018784476, Accuracy: 1.0
+Epoch:79, Time:0ms, TrainError:0.01790027, TrainErrorChange:0.01790027, Accuracy: 1.0
+Epoch:80, Time:0ms, TrainError:0.017080564, TrainErrorChange:0.017080564, Accuracy: 1.0
+Epoch:81, Time:0ms, TrainError:0.016319629, TrainErrorChange:0.016319629, Accuracy: 1.0
+Epoch:82, Time:0ms, TrainError:0.0156122865, TrainErrorChange:0.0156122865, Accuracy: 1.0
+Epoch:83, Time:0ms, TrainError:0.014953814, TrainErrorChange:0.014953814, Accuracy: 1.0
+Epoch:84, Time:0ms, TrainError:0.014339962, TrainErrorChange:0.014339962, Accuracy: 1.0
+Epoch:85, Time:0ms, TrainError:0.013766885, TrainErrorChange:0.013766885, Accuracy: 1.0
+Epoch:86, Time:0ms, TrainError:0.013231117, TrainErrorChange:0.013231117, Accuracy: 1.0
+Epoch:87, Time:0ms, TrainError:0.012729518, TrainErrorChange:0.012729518, Accuracy: 1.0
+Epoch:88, Time:0ms, TrainError:0.012259259, TrainErrorChange:0.012259259, Accuracy: 1.0
+Epoch:89, Time:0ms, TrainError:0.0118177915, TrainErrorChange:0.0118177915, Accuracy: 1.0
+Epoch:90, Time:0ms, TrainError:0.011402788, TrainErrorChange:0.011402788, Accuracy: 1.0
+Epoch:91, Time:0ms, TrainError:0.011012162, TrainErrorChange:0.011012162, Accuracy: 1.0
+Epoch:92, Time:0ms, TrainError:0.010644015, TrainErrorChange:0.010644015, Accuracy: 1.0
+Epoch:93, Time:0ms, TrainError:0.010296619, TrainErrorChange:0.010296619, Accuracy: 1.0
+Epoch:94, Time:0ms, TrainError:0.009968424, TrainErrorChange:0.009968424, Accuracy: 1.0
+
+TRAINING COMPLETED
+Total Training Time: 87ms
+------------------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.968 s
+[INFO] Finished at: 2021-01-23T18:33:21Z
+[INFO] ------------------------------------------------------------------------
