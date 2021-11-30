@@ -1,6 +1,6 @@
 # Deep Netts Community Edition
 
-[![GPL 3.0 with CPE](https://img.shields.io/badge/License-GNU%203.0%20with%20CPE-blue.svg)](COPYING)| ![build-deepnetts-examples](https://github.com/deepnetts/deepnetts-communityedition/workflows/build-deepnetts-examples/badge.svg) | [![DeepNetts](https://img.shields.io/docker/pulls/neomatrix369/deepnetts.svg)](https://hub.docker.com/r/neomatrix369/deepnetts)
+[![GPL 2.0 with CPE](https://img.shields.io/badge/License-GNU%203.0%20with%20CPE-blue.svg)](COPYING)| ![build-deepnetts-examples](https://github.com/deepnetts/deepnetts-communityedition/workflows/build-deepnetts-examples/badge.svg) | [![DeepNetts](https://img.shields.io/docker/pulls/neomatrix369/deepnetts.svg)](https://hub.docker.com/r/neomatrix369/deepnetts)
 
 To be able to use Deep Netts in your Maven based Java project, add the following dependency into dependencies section of your *pom.xml* file:
 
