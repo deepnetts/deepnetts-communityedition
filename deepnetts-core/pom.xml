@@ -91,7 +91,8 @@
         <dependency>
             <groupId>javax.visrec</groupId>
             <artifactId>visrec-api</artifactId>
-            <version>1.0.4</version>
+            <version>1.0.4-SNAPSHOT</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 
