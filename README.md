@@ -7,7 +7,7 @@ To be able to use Deep Netts in your Maven based Java project, add the following
         <dependency>
             <groupId>com.deepnetts</groupId>
             <artifactId>deepnetts-core</artifactId>
-            <version>1.12</version>
+            <version>1.13.2</version>
         </dependency>
     
 Learn more about Deep Netts Community adition at https://www.deepnetts.com/blog/deep-netts-community-edition
