@@ -1,3 +1,5 @@
+<a href="https://foojay.io/works-with-openjdk"><img align="right" src="https://github.com/foojayio/badges/raw/main/works_with_openjdk/Works-with-OpenJDK.png" width="100"></a>
+
 # Deep Netts Community Edition
 
 [![GPL 2.0 with CPE](https://img.shields.io/badge/License-GNU%202.0%20with%20CPE-blue.svg)](COPYING)| ![build-deepnetts-examples](https://github.com/deepnetts/deepnetts-communityedition/workflows/build-deepnetts-examples/badge.svg) | [![DeepNetts](https://img.shields.io/docker/pulls/neomatrix369/deepnetts.svg)](https://hub.docker.com/r/neomatrix369/deepnetts)
