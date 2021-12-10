@@ -49,7 +49,7 @@ public class IrisFlowersClassifier {
         int numOutputs = 3; // corresponds to number of possible classes/categories
         
         // load iris data  set from csv file
-        DataSet dataSet = DataSets.readCsv("deepnetts-examples/datasets/iris_data_normalised.txt", numInputs, numOutputs, true);
+        DataSet dataSet = DataSets.readCsv("datasets/iris_data_normalised.txt", numInputs, numOutputs, true);
         // split loaded data into 60 : 40% ratio
         DataSet[] trainTestSet = dataSet.split(0.6, 0.4);
 
