@@ -63,21 +63,21 @@ public class IrisFlowersClassifier {
                 .build();
 
         // create and configure instanceof backpropagation trainer
-//        BackpropagationTrainer trainer = neuralNet.getTrainer();
-//        trainer.setMaxError(0.04f);
-//        trainer.setLearningRate(0.01f);
-//        trainer.setMomentum(0.9f);
-//        trainer.setOptimizer(OptimizerType.MOMENTUM);
+        BackpropagationTrainer trainer = neuralNet.getTrainer();
+        trainer.setMaxError(0.04f);
+        trainer.setLearningRate(0.01f);
+        trainer.setMomentum(0.9f);
+        trainer.setOptimizer(OptimizerType.MOMENTUM);
 
         neuralNet.train(trainTestSet[0]);
          
-//        // evaluate/test classifier
-//        ClassifierEvaluator evaluator = new ClassifierEvaluator();
-//        EvaluationMetrics em = evaluator.evaluate(neuralNet, trainTestSet[1]);
-//        System.out.println("CLASSIFIER EVALUATION METRICS");
-//        System.out.println(em);
-//        System.out.println("CONFUSION MATRIX");
-//        ConfusionMatrix cm = evaluator.getConfusionMatrix();
-//        System.out.println(cm);
+        // evaluate/test classifier
+        ClassifierEvaluator evaluator = new ClassifierEvaluator();
+        EvaluationMetrics em = evaluator.evaluate(neuralNet, trainTestSet[1]);
+        System.out.println("CLASSIFIER EVALUATION METRICS");
+        System.out.println(em);
+        System.out.println("CONFUSION MATRIX");
+        ConfusionMatrix cm = evaluator.getConfusionMatrix();
+        System.out.println(cm);
     }
 }
