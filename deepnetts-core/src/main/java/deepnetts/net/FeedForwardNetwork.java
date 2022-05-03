@@ -44,7 +44,10 @@ import deepnetts.util.Tensor;
  */
 public final class FeedForwardNetwork extends NeuralNetwork<BackpropagationTrainer> {
 
+    private static final long serialVersionUID = 5819940381359274290L;    
+    
     private Tensor inputTensor;
+    
 
     /**
      * Private constructor allows instantiation only using builder
