@@ -21,6 +21,7 @@
 
 package deepnetts.examples;
 
+import deepnetts.examples.util.FileIODebug;
 import deepnetts.core.DeepNetts;
 import deepnetts.data.ImageSet;
 import deepnetts.eval.ClassifierEvaluator;
@@ -80,13 +81,12 @@ public class DukeDetector {
                 .lossFunction(LossType.CROSS_ENTROPY)
                 .build();
 
-
         convNet.setOutputLabels(imageSet.getTargetColumnsNames());
 
         LOGGER.info("Training neural network");
 
         // create a set of convolutional networks and do training, crossvalidation and performance evaluation
-        BackpropagationTrainer trainer = new BackpropagationTrainer(convNet);
+        BackpropagationTrainer trainer = convNet.getTrainer();
         trainer.setMaxError(0.05f)
                 .setLearningRate(0.01f);
         trainer.train(imageSet);
@@ -108,7 +108,7 @@ public class DukeDetector {
         System.out.println(cm);
         
         // load saved network
-        NeuralNetwork loadedNeuralNet = FileIO.createFromFile(new File("DukeDetector.dnet"));
+        NeuralNetwork loadedNeuralNet = FileIODebug.createFromFile(new File("DukeDetector.dnet"));
         
 
         // to use recognizer for single image

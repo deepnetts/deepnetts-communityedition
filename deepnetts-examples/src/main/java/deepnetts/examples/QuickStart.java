@@ -1,5 +1,6 @@
 package deepnetts.examples;
 
+import deepnetts.examples.util.FileIODebug;
 import deepnetts.data.DataSets;
 import javax.visrec.ml.eval.EvaluationMetrics;
 import deepnetts.eval.Evaluators;
@@ -57,8 +58,6 @@ public class QuickStart {
         FileIO.writeToFile(neuralNet, "myNeuralNet.dnet");
         
         NeuralNetwork loadedNeuralNet = FileIO.createFromFile(new File("myNeuralNet.dnet"));
-        
-        em = Evaluators.evaluateClassifier(loadedNeuralNet, dataSet);
-        System.out.println(em);        
+           
     }
 }
