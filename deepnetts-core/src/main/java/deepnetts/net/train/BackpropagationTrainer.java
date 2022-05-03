@@ -59,7 +59,7 @@ import java.util.Properties;
 public class BackpropagationTrainer implements Trainer, Serializable {
 
 	
-	private static final long serialVersionUID = -2074106047858300199L;
+    private static final long serialVersionUID = -2074106047858300199L;
 	
 	
     /**
