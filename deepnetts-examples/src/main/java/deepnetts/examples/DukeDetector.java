@@ -26,6 +26,7 @@ import deepnetts.data.ImageSet;
 import deepnetts.eval.ClassifierEvaluator;
 import deepnetts.eval.ConfusionMatrix;
 import deepnetts.net.ConvolutionalNetwork;
+import deepnetts.net.NeuralNetwork;
 import deepnetts.net.layers.activation.ActivationType;
 import deepnetts.net.loss.LossType;
 import deepnetts.net.train.BackpropagationTrainer;
@@ -48,7 +49,7 @@ public class DukeDetector {
 
     static final Logger LOGGER = LogManager.getLogger(DeepNetts.class.getName());
 
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
         int imageWidth = 64;
         int imageHeight = 64;
 
@@ -100,11 +101,15 @@ public class DukeDetector {
 
         // to evaluate recognizer with image set
         ClassifierEvaluator evaluator = new ClassifierEvaluator();
-        EvaluationMetrics pm = evaluator.evaluate(convNet, imageSet);
-        System.out.println(pm);
+        EvaluationMetrics evalResults = evaluator.evaluate(convNet, imageSet);
+        System.out.println(evalResults);
 
         ConfusionMatrix cm = evaluator.getConfusionMatrix();
         System.out.println(cm);
+        
+        // load saved network
+        NeuralNetwork loadedNeuralNet = FileIO.createFromFile(new File("DukeDetector.dnet"));
+        
 
         // to use recognizer for single image
 //        BufferedImage image = ImageIO.read(new File("/home/zoran/datasets/DukeSet/duke/duke7.jpg"));

@@ -4,11 +4,13 @@ import deepnetts.data.DataSets;
 import javax.visrec.ml.eval.EvaluationMetrics;
 import deepnetts.eval.Evaluators;
 import deepnetts.net.FeedForwardNetwork;
+import deepnetts.net.NeuralNetwork;
 import deepnetts.net.layers.activation.ActivationType;
 import deepnetts.net.loss.LossType;
 import deepnetts.net.train.BackpropagationTrainer;
 import deepnetts.util.DeepNettsException;
 import deepnetts.util.FileIO;
+import java.io.File;
 import java.io.IOException;
 import javax.visrec.ml.data.DataSet;
 
@@ -21,7 +23,7 @@ import javax.visrec.ml.data.DataSet;
  */
 public class QuickStart {
 
-    public static void main(String[] args) throws DeepNettsException, IOException {
+    public static void main(String[] args) throws DeepNettsException, IOException, ClassNotFoundException {
         // load data  set from csv file
         DataSet dataSet = DataSets.readCsv("datasets/iris_data_normalised.txt", 4, 3, true);
         dataSet.shuffle();
@@ -53,5 +55,10 @@ public class QuickStart {
 
         // save trained network to file
         FileIO.writeToFile(neuralNet, "myNeuralNet.dnet");
+        
+        NeuralNetwork loadedNeuralNet = FileIO.createFromFile(new File("myNeuralNet.dnet"));
+        
+        em = Evaluators.evaluateClassifier(loadedNeuralNet, dataSet);
+        System.out.println(em);        
     }
 }
