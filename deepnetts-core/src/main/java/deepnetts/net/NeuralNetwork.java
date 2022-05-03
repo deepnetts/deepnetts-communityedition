@@ -39,6 +39,8 @@ import java.util.List;
 import javax.visrec.ml.data.DataSet;
 import javax.visrec.ml.eval.EvaluationMetrics;
 import deepnetts.data.MLDataItem;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 /**
  * Base class for all neural networks in DeepNetts.
@@ -252,5 +254,5 @@ public class NeuralNetwork<T extends Trainer> implements TrainerProvider<T>, Ser
                 
         return sb.toString();
     }
-
+    
 }

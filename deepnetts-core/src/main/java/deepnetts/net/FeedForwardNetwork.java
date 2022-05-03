@@ -35,6 +35,9 @@ import deepnetts.net.loss.MeanSquaredErrorLoss;
 import deepnetts.net.train.BackpropagationTrainer;
 import deepnetts.util.RandomGenerator;
 import deepnetts.util.Tensor;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.List;
 
 /**
  * Feed forward neural network architecture, also known as Multi Layer Perceptron.
@@ -46,7 +49,7 @@ public final class FeedForwardNetwork extends NeuralNetwork<BackpropagationTrain
 
     private static final long serialVersionUID = 5819940381359274290L;    
     
-    private Tensor inputTensor;
+    private transient Tensor inputTensor;
     
 
     /**
@@ -72,6 +75,31 @@ public final class FeedForwardNetwork extends NeuralNetwork<BackpropagationTrain
         return getOutput();
     }
 
+    private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException
+    {
+        ois.defaultReadObject();
+        
+        //This has to be enabled when layers.init() methods stop touching not null class members (class fields) after deserialization.
+        if (false) {
+        	initClassFieldsOfNetAndAllLayers();
+        }
+    }
+    
+    /**
+     * This method is called in 2 scenarios:
+     * 1. Creating new ConvolutionalNetwork instance, where all class members are null and have to be initialized.
+     * 2. After deserialization from saved net file, where some class members will be initialized by reading the stream during deserialization in defaultReadObject method. 
+     * 
+     * Init methods of all layers must be sensitive for both scenarios and check if field is null before initializing it with default new objects.
+     * In most cases if the field is not null, than init method should not touch it.
+     */
+    private void initClassFieldsOfNetAndAllLayers() {
+    	List<AbstractLayer> layers = this.getLayers();
+        for (AbstractLayer cur: layers) {
+            cur.init();
+        }
+    }    
+    
     /**
      * Returns builder for Feed Forward Network
      * @return

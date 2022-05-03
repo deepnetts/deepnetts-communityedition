@@ -97,7 +97,7 @@ public class FileIO {
     public static NeuralNetwork createFromFile(File file) throws IOException, ClassNotFoundException {
         NeuralNetwork nnet;
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-            nnet = (ConvolutionalNetwork) ois.readObject();
+            nnet = (NeuralNetwork) ois.readObject();
         }
         return nnet;
     }
