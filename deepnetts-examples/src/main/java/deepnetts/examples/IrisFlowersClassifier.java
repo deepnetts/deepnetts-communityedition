@@ -23,7 +23,6 @@ package deepnetts.examples;
 
 import deepnetts.data.DataSets;
 import deepnetts.data.preprocessing.scale.MaxScaler;
-import deepnetts.data.preprocessing.scale.MinMaxScaler;
 import deepnetts.eval.ClassifierEvaluator;
 import deepnetts.eval.ConfusionMatrix;
 import javax.visrec.ml.eval.EvaluationMetrics;
@@ -56,7 +55,7 @@ public class IrisFlowersClassifier {
         DataSet dataSet = DataSets.readCsv("datasets/iris.csv", numInputs, numOutputs, true);
         
         // scale data to range [0,1] in order to make it suitable for neural network processing
-        MaxScaler scaler = new MaxScaler(dataSet);
+        Scaler scaler = new MaxScaler(dataSet);
         scaler.apply(dataSet);
         
         // split loaded data into training and test set 60 : 40% ratio
