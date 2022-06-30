@@ -66,11 +66,11 @@ public class IrisFlowersClassifier {
 
         // create instance of feed forward neural network (aka multi layer percetpron) using corresponding builder
         FeedForwardNetwork neuralNet = FeedForwardNetwork.builder()
-                .addInputLayer(numInputs)
-                .addFullyConnectedLayer(8, ActivationType.TANH)
-                .addOutputLayer(numOutputs, ActivationType.SOFTMAX)
-                .lossFunction(LossType.CROSS_ENTROPY)
-                .randomSeed(456)
+                .addInputLayer(numInputs) // input layer accepts inputs from data set, and it's size must correspond to number of inputs in data set
+                .addFullyConnectedLayer(8, ActivationType.RELU) // hidden fully connected layer enables solving more complex problems
+                .addOutputLayer(numOutputs, ActivationType.SOFTMAX) // commonly used activation function in output layer for multi class classification
+                .lossFunction(LossType.CROSS_ENTROPY) // commonly used loss function for multi class classification problems
+                .randomSeed(456)    // fix ramdomization seed in order to be able to repeat the results - can use nay value
                 .build();
 
         // get and configure instanceof training algorithm for neural network - backpropagation trainer
