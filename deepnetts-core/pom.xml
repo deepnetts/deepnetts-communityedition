@@ -5,7 +5,7 @@
 
     <groupId>com.deepnetts</groupId>
     <artifactId>deepnetts-core</artifactId>
-    <version>1.13.3</version>
+    <version>1.13.4</version>
     <packaging>jar</packaging>
 
     <name>com.deepnetts:deepnetts-core</name>
@@ -99,11 +99,11 @@
 
     <distributionManagement>
       <repository>
-        <id>ossrh</id>
+        <id>central</id>
         <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
       </repository>
       <snapshotRepository>
-        <id>ossrh</id>
+        <id>central</id>
         <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
       </snapshotRepository>
     </distributionManagement>
@@ -171,13 +171,17 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>            
             
             <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-deploy-plugin</artifactId>
-              <version>3.1.2</version>
-            </plugin>            
+              <groupId>org.sonatype.central</groupId>
+              <artifactId>central-publishing-maven-plugin</artifactId>
+              <version>0.9.0</version>
+              <extensions>true</extensions>
+              <configuration>
+                <publishingServerId>central</publishingServerId>
+              </configuration>
+            </plugin>                                
         </plugins>
     </build>
 

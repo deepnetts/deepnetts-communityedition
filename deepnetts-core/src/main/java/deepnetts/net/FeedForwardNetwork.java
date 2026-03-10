@@ -61,7 +61,7 @@ public final class FeedForwardNetwork extends NeuralNetwork<BackpropagationTrain
     }
 
     public void setInput(float[] inputs) {
-        inputTensor.setValues(inputs); 
+        inputTensor  = new Tensor(inputs); 
         setInput(inputTensor);
     }
 
