@@ -83,8 +83,7 @@ jobs:
       - name: Run deepnetts-example "MnistHandwrittenDigitClassification"
         run: |
            cd deepnetts-examples
-           mvn exec:java -Dexec.mainClass=deepnetts.examples.MnistHandwrittenDigitClassification \
-               || true && echo "Could not build and run this process successfully"
+           mvn exec:java -Dexec.mainClass=deepnetts.examples.MnistHandwrittenDigitClassification 
       - name: Run deepnetts-example "QuickStart"
         run: |
            cd deepnetts-examples
