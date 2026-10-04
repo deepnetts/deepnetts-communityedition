@@ -79,7 +79,6 @@ public class Tensor1D extends TensorBase {
             throw new DeepNettsException("Lengths don't match: " + values.length + "!=" + toAdd.values.length);
         }
         if (DeepNetts.getInstance().useVectorAPI()) {
-            //addVectorized(toAdd);
             vectorizationImpl.addVectorized(this, toAdd);
             return this;
         }
@@ -91,28 +90,6 @@ public class Tensor1D extends TensorBase {
         return this;
     }
 
-//    static final VectorSpecies<Float> SPECIES = FloatVector.SPECIES_PREFERRED;
-//    static final int vecLen = SPECIES.length();    
-//    
-//    final Tensor1D addVectorized(Tensor1D toAdd) {
-//
-//        int length = this.numElements();
-//        int upperBound = SPECIES.loopBound(length);
-//
-//        int i = 0;
-//        for (; i < upperBound; i += vecLen) {
-//            FloatVector vec1 = FloatVector.fromArray(SPECIES, values, i);
-//            FloatVector vec2 = FloatVector.fromArray(SPECIES, toAdd.values, i);
-//            FloatVector result = vec1.add(vec2);
-//            result.intoArray(this.values, i);
-//        }
-//
-//        for (; i < length; i++) {
-//            this.values[i] += toAdd.values[i];
-//        }
-//
-//        return this;
-//    }
 
     @Override
     public TensorBase copy() {
@@ -213,34 +190,4 @@ public class Tensor1D extends TensorBase {
             }
         }
     }
-
-//    public void outerProductVectorized(Tensor1D otherTensor, Tensor2D result) {
-//        int numRows = this.numElements();
-//        int numCols = otherTensor.numElements();
-//
-//        float[] resultValues = result.getValues(); // COLUMN-MAJOR LAYOUT
-//        float[] colValues = otherTensor.values;
-//        float[] rowValues = this.values;
-//
-//        int upperBound = SPECIES.loopBound(numRows);
-//
-//        // radi efikasneg upisivanje rezultata, prolazimo prvo kroz kolone
-//        for (int col = 0; col < numCols; col++) {
-//            float colVal = colValues[col];
-//
-//            int offset = col * numRows;
-//            int i = 0;
-//
-//            for (; i < upperBound; i += vecLen) {
-//                FloatVector vecA = FloatVector.fromArray(SPECIES, rowValues, i);
-//                FloatVector vecProd = vecA.mul(colVal);
-//                vecProd.intoArray(resultValues, offset + i);
-//            }
-//
-//            for (; i < numRows; i++) {
-//                resultValues[offset + i] = rowValues[i] * colVal;
-//            }
-//        }
-//    }
-
 }
