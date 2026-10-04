@@ -540,7 +540,7 @@ public class ConvolutionalNetwork extends NeuralNetwork<BackpropagationTrainer> 
             for (int i = 0; i < neuralNet.getLayers().size(); i++) {
                 AbstractLayer currentLayer = neuralNet.getLayers().get(i);
                 currentLayer.setNetworkType(NetworkType.CONVOLUTIONAL);
-                currentLayer.setCudaHandles(neuralNet.cudaHandles); // da li i za InputLayer? nije potrebna ali ne smeta
+               // currentLayer.setCudaHandles(neuralNet.cudaHandles); // da li i za InputLayer? nije potrebna ali ne smeta
                  if (setDefaultActivation && !(currentLayer instanceof InputLayer) && !(currentLayer instanceof OutputLayer)) { // ne za izlazni layer
                      // on uvek setuje default actvation type to b trebalo popraviti
                     currentLayer.setActivationType(defaultActivationType); // ali ovo ne treba ovako!!! ako je vec nesto setovano onda nemoj to d agazis
@@ -566,7 +566,7 @@ public class ConvolutionalNetwork extends NeuralNetwork<BackpropagationTrainer> 
             // init all layers
             for (AbstractLayer layer : neuralNet.getLayers()) {
                 if (DeepNetts.getInstance().useCuda()) {
-                    layer.setCudaHandles(neuralNet.cudaHandles); // if use cuda
+           //         layer.setCudaHandles(neuralNet.cudaHandles); // if use cuda
                 }
                 if (DeepNetts.getInstance().isMultithreaded()) {
                     layer.setThreadPool(neuralNet.threadPool);

@@ -1,7 +1,5 @@
 package deepnetts.net.layers.activation;
 
-import deepnetts.accl.spi.ActivationVectorizationProvider;
-import deepnetts.accl.spi.ActivationVectorizationService;
 import deepnetts.core.DeepNetts;
 import deepnetts.tensor.Tensor;
 import deepnetts.tensor.Tensor3D;
@@ -21,7 +19,6 @@ import java.io.Serializable;
  */
 public final class LeakyRelu implements ActivationFunction, Serializable {
 
-    private static ActivationVectorizationProvider vectorizationImpl = ActivationVectorizationService.defaultProvider();;
         
     private final float a;
 
@@ -69,8 +66,7 @@ public final class LeakyRelu implements ActivationFunction, Serializable {
     public void apply(Tensor tensor, int from, int to) { // ovde je problem kada se paralelizuju trebao bih da imam from to idx, ili da ide posle kad zavrse threadovi da cekaju
 
         if (DeepNetts.getInstance().useVectorAPI()) {
-            //applyVectorized(tensor);
-            vectorizationImpl.leakyRelu(tensor, a);
+       //     vectorizationImpl.leakyRelu(tensor, a);
             return;
         }
         final float[] values = tensor.getValues();

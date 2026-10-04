@@ -215,7 +215,7 @@ public final class Tensor2D extends TensorBase {
         }
 
         if (DeepNetts.getInstance().useVectorAPI()) {
-            vectorizationImpl.addVectorized(this, toAdd);
+     //       vectorizationImpl.addVectorized(this, toAdd);
             return this;
         }
 
@@ -400,7 +400,7 @@ public final class Tensor2D extends TensorBase {
         }
 
         if (DeepNetts.getInstance().useVectorAPI()) {
-            matMulVectorized(matrixB, result);
+          //  matMulVectorized(matrixB, result);
             return result;
         }
         
@@ -441,7 +441,7 @@ public final class Tensor2D extends TensorBase {
     public Tensor1D matMul(Tensor1D vectorB, Tensor1D result) {
 
         if (DeepNetts.getInstance().useVectorAPI()) {
-            matMulVectorized(vectorB, result);
+         //   matMulVectorized(vectorB, result);
             return result;
         }
 
@@ -473,29 +473,7 @@ public final class Tensor2D extends TensorBase {
         return colsCache[colIdx];
     }
 
-    public Tensor1D matMulVectorized(Tensor1D vector, Tensor1D result) {
-        int size = this.rows();
 
-        if (size < 224) {
-            return  vectorizationImpl.matMulFma(this, vector, result);
-        } else if (size >= 224 && size < 512) {
-            return vectorizationImpl.matMulWithAddVector(this, vector, result);
-        } else if (size >= 512 && size < 832) {
-            return vectorizationImpl.matMulWithAddVectorParallel(this, vector, result);
-        } else {
-            return vectorizationImpl.matMulFmaParallel(this, vector, result);
-        }
-    }
-
-    public Tensor2D matMulVectorized(Tensor2D matrixB, Tensor2D result) {
-        int size = this.rows(); // use rows * cols instead
-
-        if (size < 128) {
-            return vectorizationImpl.matMulFma(this, matrixB, result);
-        } else {
-            return vectorizationImpl.matMulWithAddVectorParallel(this, matrixB, result);
-        }
-    }
 
     public void outerProductAccumulate(Tensor2D inputs, Tensor2D result) {
 

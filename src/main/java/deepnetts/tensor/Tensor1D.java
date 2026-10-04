@@ -79,7 +79,7 @@ public class Tensor1D extends TensorBase {
             throw new DeepNettsException("Lengths don't match: " + values.length + "!=" + toAdd.values.length);
         }
         if (DeepNetts.getInstance().useVectorAPI()) {
-            vectorizationImpl.addVectorized(this, toAdd);
+    //        vectorizationImpl.addVectorized(this, toAdd);
             return this;
         }
 
@@ -169,7 +169,7 @@ public class Tensor1D extends TensorBase {
     public void outerProduct(Tensor1D otherTensor, Tensor2D result) {
         
         if (DeepNetts.getInstance().useVectorAPI()) {
-            vectorizationImpl.outerProductVectorized(this, otherTensor, result);
+          //  vectorizationImpl.outerProductVectorized(this, otherTensor, result);
             return;
         }
         

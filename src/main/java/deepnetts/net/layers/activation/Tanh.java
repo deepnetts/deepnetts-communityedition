@@ -1,7 +1,5 @@
 package deepnetts.net.layers.activation;
 
-import deepnetts.accl.spi.ActivationVectorizationProvider;
-import deepnetts.accl.spi.ActivationVectorizationService;
 import deepnetts.core.DeepNetts;
 import deepnetts.tensor.Tensor;
 import deepnetts.tensor.Tensor3D;
@@ -14,7 +12,6 @@ import java.io.Serializable;
  * @author zoran
  */
 public final class Tanh implements ActivationFunction, Serializable {
-    private static ActivationVectorizationProvider vectorizationImpl = ActivationVectorizationService.defaultProvider();;
         
     @Override
     public float getValue(float x) {
@@ -61,9 +58,8 @@ public final class Tanh implements ActivationFunction, Serializable {
     @Override
     public void apply(Tensor tensor, int from, int to) { // ovde je problem kada se paralelizuju trebao bih da imam from to idx, ili da ide posle kad zavrse threadovi da cekaju
         
-        if (DeepNetts.getInstance().useVectorAPI()) {
-            //applyVectorized(tensor);
-            vectorizationImpl.tanh(tensor);
+        if (DeepNetts.getInstance().useVectorAPI()) {           
+   //         vectorizationImpl.tanh(tensor);
             return;
         }
         

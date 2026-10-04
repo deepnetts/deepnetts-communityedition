@@ -1,7 +1,5 @@
 package deepnetts.net;
 
-import deepnetts.accl.spi.AcceleratorService;
-import deepnetts.accl.AcceleratorHandle;
 import deepnetts.core.DeepNetts;
 import deepnetts.eval.Evaluators;
 import deepnetts.net.layers.AbstractLayer;
@@ -97,8 +95,6 @@ public class NeuralNetwork<T extends Trainer> implements TrainerProvider<T>, Ser
 
     private float regularizationSum = 0;
 
-    protected transient AcceleratorHandle cudaHandles;
-
     protected transient DeepNettsThreadPool threadPool;
 
     private Mode mode = Mode.INFERENCE;
@@ -108,12 +104,6 @@ public class NeuralNetwork<T extends Trainer> implements TrainerProvider<T>, Ser
     protected NeuralNetwork() {
        // DeepNetts.checkLicense(); // if license is not valid this will throw exception
         layers = new ArrayList();
-        if (DeepNetts.getInstance().useCuda()) {
-            this.arena = Arena.ofConfined();
-
-            //cudaHandles = new CudaHandles(arena);
-            cudaHandles = AcceleratorService.defaultProvider().createAcceleratorHandle(arena); //a implementacija ce da instacira, uzmi default service provider i instacmiraj ga
-        }
 
         // if multi threaded is on 
         if (DeepNetts.getInstance().isMultithreaded()) {
@@ -499,7 +489,7 @@ public class NeuralNetwork<T extends Trainer> implements TrainerProvider<T>, Ser
         if (DeepNetts.getInstance().useCuda()) {            
           //  cudaHandles = new CudaHandles(arena);
             this.arena = Arena.ofConfined(); 
-            cudaHandles = AcceleratorService.defaultProvider().createAcceleratorHandle(arena);
+          //  cudaHandles = AcceleratorService.defaultProvider().createAcceleratorHandle(arena);
         }
         if (DeepNetts.getInstance().isMultithreaded()) {
             threadPool = new DeepNettsThreadPool();
@@ -507,7 +497,7 @@ public class NeuralNetwork<T extends Trainer> implements TrainerProvider<T>, Ser
 
         layers.forEach((layer) -> {
             if (DeepNetts.getInstance().useCuda()) {
-                layer.setCudaHandles(cudaHandles);
+              //  layer.setCudaHandles(cudaHandles);
             }
             if (DeepNetts.getInstance().isMultithreaded()) {
                 layer.setThreadPool(threadPool);

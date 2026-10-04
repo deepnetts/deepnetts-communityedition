@@ -20,7 +20,6 @@
  */
 package deepnetts.net.layers;
 
-import deepnetts.accl.spi.AcceleratorService;
 import deepnetts.net.layers.activation.ActivationType;
 import deepnetts.core.DeepNetts;
 import deepnetts.net.Mode;
@@ -263,10 +262,8 @@ public class FullyConnectedLayer extends AbstractLayer<TensorBase, TensorBase, T
 
         weights.createRowsCache();
         if (DeepNetts.getInstance().useCuda()) {
-            //forward = new FullyConnectedForwardCuda(cudaHandles, this);
-            forwardImpl = AcceleratorService.defaultProvider().createFullyConnectedForwardAcc(cudaHandles, this);
-            //backward = new FullyConnectedBackwardCuda(cudaHandles, this);
-            backwardImpl = AcceleratorService.defaultProvider().createFullyConnectedBackwardAcc(cudaHandles, this); //new FullyConnectedBackwardCuda(cudaHandles, this);
+       //     forwardImpl = AcceleratorService.defaultProvider().createFullyConnectedForwardAcc(cudaHandles, this);
+         //   backwardImpl = AcceleratorService.defaultProvider().createFullyConnectedBackwardAcc(cudaHandles, this); //new FullyConnectedBackwardCuda(cudaHandles, this);
         } else if (!multithreaded) { // single threaded
             if (!batchMode) { // inputs instanceof Tensor1D
                 forwardImpl = new SingleThreadedMatrixForward(); // default forward
@@ -731,7 +728,7 @@ public class FullyConnectedLayer extends AbstractLayer<TensorBase, TensorBase, T
                 inputsT.createColsCache();
                 deltas2d.createRowsCache();
 
-                deltas2d.matMulVectorized(inputsT, gradients);
+                deltas2d.matMul(inputsT, gradients);
 
                 // hajde sad i delta weights vektorizovan a ne ovako sa for ispodsla
                 

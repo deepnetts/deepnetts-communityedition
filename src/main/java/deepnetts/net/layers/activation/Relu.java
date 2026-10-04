@@ -1,7 +1,5 @@
 package deepnetts.net.layers.activation;
 
-import deepnetts.accl.spi.ActivationVectorizationProvider;
-import deepnetts.accl.spi.ActivationVectorizationService;
 import deepnetts.core.DeepNetts;
 import deepnetts.tensor.Tensor;
 import deepnetts.tensor.Tensor3D;
@@ -19,8 +17,6 @@ import java.io.Serializable;
 public final class Relu implements ActivationFunction, Serializable {
 
     private float clipValue = 3f;// should be clipped in all methods below
-    private static ActivationVectorizationProvider vectorizationImpl = ActivationVectorizationService.defaultProvider();;
-
     
     @Override
     public float getValue(final float x) {
@@ -59,8 +55,7 @@ public final class Relu implements ActivationFunction, Serializable {
     public void apply(Tensor tensor, int from, int to) {
 
         if (DeepNetts.getInstance().useVectorAPI()) {
-           // applyVectorized(tensor);
-            vectorizationImpl.relu(tensor);
+//            vectorizationImpl.relu(tensor);
             return;
         }
 

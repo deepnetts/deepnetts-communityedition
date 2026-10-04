@@ -1,15 +1,13 @@
 package deepnetts.tensor;
 
-import deepnetts.accl.spi.AcceleratorService;
+
 import deepnetts.net.layers.activation.ActivationFunction;
 import deepnetts.util.DeepNettsException;
 import deepnetts.util.RandomGenerator;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.function.Function;
-import deepnetts.accl.AcceleratorTensorBridge;
-import deepnetts.accl.spi.TensorVectorizationProvider;
-import deepnetts.accl.spi.TensorVectorizationService;
+
 
 /**
  * The base call for multidimensional array/tensors. It us used as a basic data
@@ -20,7 +18,7 @@ import deepnetts.accl.spi.TensorVectorizationService;
 public class TensorBase implements Tensor, Serializable {
 
     private static final long serialVersionUID = 9123299065043860349L;
-    protected static final TensorVectorizationProvider vectorizationImpl = TensorVectorizationService.defaultProvider();
+ //   protected static final TensorVectorizationProvider vectorizationImpl;//= TensorVectorizationService.defaultProvider();
 
     protected Shape shape; 
     protected int numDimensions;
@@ -48,11 +46,6 @@ public class TensorBase implements Tensor, Serializable {
      * sets values
      */
     protected float values[]; // todo: use ByteBuffer instead of array in order to avoid range checking
-
-    /**
-     * Bridge for this tensor on Cuda device
-     */
-    private transient AcceleratorTensorBridge cudaBridge;
 
     // remove and replace with costructor with shape param
 //    protected TensorBase() {
@@ -560,36 +553,7 @@ public class TensorBase implements Tensor, Serializable {
         }
     }
 
-    // ovu metodu izdvojiti u posebnu klasu da bi izvukao dependency napolje      
-    // problem je sto imam ovaj atribut cudaTensor koji je jako zgodan, mozda napraviti neki opsti TensorBridge 
-    // druga stvar je kako u layerima izvuci
-    // ubaci svuda i debug mode
-    // creates bridge on first access tha continue using the same instance
-    // neka ima ovaj interfejs accelerator bridge i to ovde a onda razne implementacije u drugim
-    public AcceleratorTensorBridge getOrCreateAccBridge() {
-        if (cudaBridge == null) {
-            createAcceleratorBridge();
-        }
-        return cudaBridge;
-    }
-
-    public AcceleratorTensorBridge createAcceleratorBridge() {
-        cudaBridge = AcceleratorService.defaultProvider().createAcceleratorTensorBridge(this); // odakle da uzmem arenu
-        return cudaBridge;
-    }
-
-    public AcceleratorTensorBridge getAcceleratorBridge() {
-        return cudaBridge;
-    }
-
-    public void copyToGPU() {
-        cudaBridge.copyToDev();
-    }
-
-    public void copyFromGPU() {
-        cudaBridge.copyToHost();
-    }
-    
+     
     public boolean containsNaN() {
         for(float v : this.values) {
             if (Float.isNaN(v)) return true;

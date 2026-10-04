@@ -1,7 +1,5 @@
 package deepnetts.net.layers.activation;
 
-import deepnetts.accl.spi.ActivationVectorizationProvider;
-import deepnetts.accl.spi.ActivationVectorizationService;
 import deepnetts.core.DeepNetts;
 import deepnetts.tensor.Tensor;
 import deepnetts.tensor.Tensor3D;
@@ -20,8 +18,7 @@ public final class Sigmoid implements ActivationFunction, Serializable {
 // 	https://shaktiwadekar.medium.com/how-to-avoid-numerical-overflow-in-sigmoid-function-numerically-stable-sigmoid-function-5298b14720f6
 // https://stackoverflow.com/questions/51976461/optimal-way-of-defining-a-numerically-stable-sigmoid-function-for-a-list-in-pyth
 
-    private static ActivationVectorizationProvider vectorizationImpl = ActivationVectorizationService.defaultProvider();;
-    
+
     
     /*
         Numerical stability 
@@ -69,8 +66,7 @@ public final class Sigmoid implements ActivationFunction, Serializable {
     public void apply(Tensor tensor, int from, int to) { // ovde je problem kada se paralelizuju trebao bih da imam from to idx, ili da ide posle kad zavrse threadovi da cekaju
 
         if (DeepNetts.getInstance().useVectorAPI()) {
-           // applyVectorized(tensor);
-           vectorizationImpl.sigmoid(tensor);
+        //   vectorizationImpl.sigmoid(tensor);
             return;
         }
 

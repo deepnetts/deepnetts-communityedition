@@ -21,7 +21,6 @@
  */
 package deepnetts.net.layers;
 
-import deepnetts.accl.AcceleratorTensorBridge;
 import deepnetts.core.DeepNetts;
 import deepnetts.net.layers.activation.ActivationType;
 import deepnetts.tensor.Tensor1D;
@@ -149,13 +148,7 @@ public class InputLayer extends AbstractLayer {
 
         this.inputs = in;
         this.outputs = inputs;
-        // ovde poziv cudaAcc  da kopira tensor on device
-        if (DeepNetts.getInstance().useCuda()) {
-            AcceleratorTensorBridge cuTb = (AcceleratorTensorBridge) in.getOrCreateAccBridge(); // da li ovde cretae ili getOrCReate
-            if (!cuTb.isAllocatedOnDev()) {
-                cuTb.allocateAndCopyToDev();
-            }
-        }
+
     }
 
     /**

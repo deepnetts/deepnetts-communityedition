@@ -3,10 +3,34 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.deepnetts</groupId>
-    <version>4.0.0</version>
+    <version>4.0.4</version>
     <artifactId>deepnetts-core</artifactId>
     <packaging>jar</packaging>
     <name>Deep Netts Core</name>
+    <description>Deep learning Java library</description>
+    <url>https://deepnetts.com</url>
+    
+    <licenses>
+        <license>
+            <name>GNU General Public License, version 3, with the Classpath Exception</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    
+    <developers>
+        <developer>
+            <name>Zoran Sevarac</name>
+            <organization>Deep Netts Technologies</organization>
+            <organizationUrl>https://deepnetts.com</organizationUrl>
+        </developer>
+    </developers>   
+    
+    <scm>
+        <connection>scm:git:https://github.com/deepnetts/deepnetts-communityedition.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/deepnetts/deepnetts-communityedition.git</developerConnection>
+        <url>https://github.com/deepnetts/deepnetts-communityedition</url>
+    </scm>      
     
     <dependencies>        
         <dependency>
@@ -35,7 +59,33 @@
     <build>
               
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.11.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -81,6 +131,31 @@
                     <source>25</source>
                     <target>25</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.2.7</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.10.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
                 </configuration>
             </plugin>
         </plugins>

@@ -21,7 +21,6 @@
  */
 package deepnetts.net.layers;
 
-import deepnetts.accl.spi.AcceleratorService;
 import deepnetts.core.DeepNetts;
 import deepnetts.net.ConvolutionalNetwork;
 import deepnetts.net.layers.activation.ActivationType;
@@ -175,10 +174,8 @@ public final class MaxPoolingLayer extends AbstractLayer<TensorBase, TensorBase,
         }
 
         if (DeepNetts.getInstance().useCuda()) {
-          //  forward = new MaxPoolingForwardCuda(cudaHandles, this);
-            forwardImpl = AcceleratorService.defaultProvider().createMaxpoolingForwardAcc(cudaHandles, this);// new MaxPoolingForwardCuda(cudaHandles, this);
-           // backward = new MaxPoolingBackwardCuda(cudaHandles, this);
-            backwardImpl = AcceleratorService.defaultProvider().createMaxpoolingBackwardAcc(cudaHandles, this);
+         //   forwardImpl = AcceleratorService.defaultProvider().createMaxpoolingForwardAcc(cudaHandles, this);// new MaxPoolingForwardCuda(cudaHandles, this);
+          //  backwardImpl = AcceleratorService.defaultProvider().createMaxpoolingBackwardAcc(cudaHandles, this);
         } else if (!multithreaded) { // single threaded
             if (!batchMode) { // inputs instanceof Tensor1D
                 forwardImpl = new SingleThreadedForward(); // default forward

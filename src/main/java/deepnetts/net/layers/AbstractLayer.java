@@ -21,7 +21,6 @@
  */
 package deepnetts.net.layers;
 
-import deepnetts.accl.AcceleratorHandle;
 import deepnetts.core.DeepNetts;
 import deepnetts.net.Mode;
 import deepnetts.net.NetworkType;
@@ -130,7 +129,7 @@ public abstract class AbstractLayer<I extends TensorBase, O extends TensorBase, 
 
     protected RandomWeightsType randomWeightsType = RandomWeightsType.XAVIER;
 
-    protected transient AcceleratorHandle cudaHandles;
+   // protected transient AcceleratorHandle cudaHandles;
     protected transient Forward forwardImpl;
     protected transient Backward backwardImpl;
     protected transient DeepNettsThreadPool threadPool;
@@ -370,9 +369,9 @@ public abstract class AbstractLayer<I extends TensorBase, O extends TensorBase, 
 
     }
 
-    public void setCudaHandles(AcceleratorHandle cudaHandles) {
-        this.cudaHandles = cudaHandles;
-    }
+//    public void setCudaHandles(AcceleratorHandle cudaHandles) {
+//        this.cudaHandles = cudaHandles;
+//    }
 
     public Forward getForwardAcc() {
         return forwardImpl;

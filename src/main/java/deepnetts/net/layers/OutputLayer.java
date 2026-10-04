@@ -21,7 +21,6 @@
  */
 package deepnetts.net.layers;
 
-import deepnetts.accl.spi.AcceleratorService;
 import deepnetts.core.DeepNetts;
 import deepnetts.net.NeuralNetwork;
 import deepnetts.net.layers.activation.ActivationType;
@@ -187,10 +186,8 @@ public class OutputLayer extends AbstractLayer<TensorBase, TensorBase, Tensor2D>
     public void initTransientFields() {
 
         if (DeepNetts.getInstance().useCuda()) {
-          //  forward = new OutputLayerForwardCuda(cudaHandles, this);
-            forwardImpl = AcceleratorService.defaultProvider().createOutputForwardAcc(cudaHandles, this);
-            //backward = new OutputLayerBackwardCuda(cudaHandles, this);
-            backwardImpl = AcceleratorService.defaultProvider().createOutputBackwardAcc(cudaHandles, this);
+          //  forwardImpl = AcceleratorService.defaultProvider().createOutputForwardAcc(cudaHandles, this);
+          //  backwardImpl = AcceleratorService.defaultProvider().createOutputBackwardAcc(cudaHandles, this);
         }
 
     }

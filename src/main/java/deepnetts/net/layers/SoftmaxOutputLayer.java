@@ -5,9 +5,6 @@
  */
 package deepnetts.net.layers;
 
-import deepnetts.accl.spi.AcceleratorService;
-import deepnetts.accl.spi.ActivationVectorizationProvider;
-import deepnetts.accl.spi.ActivationVectorizationService;
 import deepnetts.core.DeepNetts;
 import deepnetts.net.layers.activation.ActivationType;
 import deepnetts.net.layers.activation.MathFunctions;
@@ -26,7 +23,6 @@ import java.util.ArrayList;
  */
 public class SoftmaxOutputLayer extends OutputLayer {  
     private static final long serialVersionUID = 609777460047517229L;
-    private static ActivationVectorizationProvider vectorizationImpl = ActivationVectorizationService.defaultProvider();;
 
 
     //private transient boolean multithreaded = false;
@@ -126,10 +122,8 @@ public class SoftmaxOutputLayer extends OutputLayer {
         weights.createRowsCache();
 
         if (DeepNetts.getInstance().useCuda()) {
-            //forward = new SoftMaxForwardCuda(cudaHandles, this);
-            forwardImpl = AcceleratorService.defaultProvider().createSoftmaxOutputForwardAcc(cudaHandles, this); //new SoftMaxForwardCuda(cudaHandles, this);
-            //backward = new SoftMaxBackwardCuda(cudaHandles, this);
-            backwardImpl = AcceleratorService.defaultProvider().createSoftmaxOutputBackwardAcc(cudaHandles, this);
+    //        forwardImpl = AcceleratorService.defaultProvider().createSoftmaxOutputForwardAcc(cudaHandles, this); //new SoftMaxForwardCuda(cudaHandles, this);
+         //   backwardImpl = AcceleratorService.defaultProvider().createSoftmaxOutputBackwardAcc(cudaHandles, this);
         } else if (!multithreaded) { // single threaded
             if (!batchMode) { // inputs instanceof Tensor1D
                 forwardImpl = new SingleThreadedForward(); // default forward
@@ -426,7 +420,7 @@ public class SoftmaxOutputLayer extends OutputLayer {
         
         // todo add cuda backward
         if (DeepNetts.getInstance().useCuda()) {
-            deltas.copyToGPU();
+           // deltas.copyToGPU();
             backwardImpl.backward();
             return;
         }
@@ -605,8 +599,7 @@ public class SoftmaxOutputLayer extends OutputLayer {
     public void applySoftmax(Tensor1D outputs1D, float maxWs) {
 
         if (DeepNetts.getInstance().useVectorAPI()) {
-            //applySoftmaxVectorized(outputs1D, maxWs);
-            vectorizationImpl.applySoftmaxVectorized(outputs1D, maxWs);            
+           // vectorizationImpl.applySoftmaxVectorized(outputs1D, maxWs);            
             return;
         }
 
@@ -632,7 +625,7 @@ public class SoftmaxOutputLayer extends OutputLayer {
 
         if (DeepNetts.getInstance().useVectorAPI()) {
             //applySoftmaxBatchVectorized(outputs2D);
-            vectorizationImpl.applySoftmaxBatchVectorized(outputs2D);
+           // vectorizationImpl.applySoftmaxBatchVectorized(outputs2D);
             return;
         }
 
@@ -659,117 +652,5 @@ public class SoftmaxOutputLayer extends OutputLayer {
         }
     }
 
-//    private void applySoftmaxVectorized(Tensor1D outputs1D, float maxWs) {
-//        int upperBound = SPECIES.loopBound(outputs1D.numElements());
-//
-//        // 1.  nadji maksimalnu vrednost (zbog numericke stabilnosti)
-//        int i = 0;
-//        for (; i < upperBound; i += vecLen) {
-//            FloatVector vec = FloatVector.fromArray(SPECIES, outputs1D.getValues(), i);
-//            float laneMax = vec.reduceLanes(VectorOperators.MAX);
-//            maxWs = Math.max(maxWs, laneMax);
-//        }
-//        for (; i < outputs1D.numElements(); i++) {
-//            maxWs = Math.max(maxWs, outputs1D.get(i));
-//        }
-//
-//        // 2. Oduzmi maxWs i izracunaj e^(x - maxWs)
-//        FloatVector maxWsVec = FloatVector.broadcast(SPECIES, maxWs);
-//        i = 0;
-//        for (; i < upperBound; i += vecLen) {
-//            FloatVector vec = FloatVector.fromArray(SPECIES, outputs1D.getValues(), i);
-//            FloatVector vecSub = vec.sub(maxWsVec);                        // x - maxWs
-//            FloatVector expVec = vecSub.lanewise(VectorOperators.EXP);    // e^(x - maxWs)
-//            expVec.intoArray(outputs1D.getValues(), i);
-//        }
-//        for (; i < outputs1D.numElements(); i++) {
-//            outputs1D.set(((float) Math.exp(outputs1D.get(i) - maxWs)), i);  // Ispravljeno!
-//        }
-//
-//        // 3. Sabiramo sve e^(x - maxWs) vrednosti
-//        FloatVector sumVec = FloatVector.zero(SPECIES);
-//        i = 0;
-//        for (; i < upperBound; i += vecLen) {
-//            FloatVector vec = FloatVector.fromArray(SPECIES, outputs1D.getValues(), i);
-//            sumVec = sumVec.add(vec);
-//        }
-//        float denominatorSum = sumVec.reduceLanes(VectorOperators.ADD);
-//        for (; i < outputs1D.numElements(); i++) {
-//            denominatorSum += outputs1D.get(i);
-//        }
-//
-//        // 4. Normalizuj: softmax = e^(x - maxWs) / suma
-//        FloatVector denSumVec = FloatVector.broadcast(SPECIES, denominatorSum);
-//        i = 0;
-//        for (; i < upperBound; i += vecLen) {
-//            FloatVector vec = FloatVector.fromArray(SPECIES, outputs1D.getValues(), i);
-//            FloatVector normalized = vec.div(denSumVec);
-//            normalized.intoArray(outputs1D.getValues(), i);
-//        }
-//        for (; i < outputs1D.numElements(); i++) {
-//            outputs1D.set(outputs1D.get(i) / denominatorSum, i);
-//        }
-//
-//    }
-//
-//    public void applySoftmaxBatchVectorized(Tensor2D logits) {
-//        int C = logits.rows();  // broj klasa (redovi)
-//        int B = logits.cols();  // batch size (kolone)
-//
-//        float[] values = logits.getValues(); // column-major: (c, b) → b * C + c
-//        int upperBound = SPECIES.loopBound(C);
-//
-//        for (int b = 0; b < B; b++) {
-//            int base = b * C;
-//
-//            // === 1. Nadji max vrednost u koloni radi numericke stabilnosti ===
-//            float maxWs = Float.NEGATIVE_INFINITY;
-//            int i = 0;
-//            for (; i < upperBound; i += vecLen) {
-//                FloatVector vec = FloatVector.fromArray(SPECIES, values, base + i);
-//                float laneMax = vec.reduceLanes(VectorOperators.MAX);
-//                maxWs = Math.max(maxWs, laneMax);
-//            }
-//            for (; i < C; i++) {
-//                maxWs = Math.max(maxWs, values[base + i]);
-//            }
-//
-//            // === 2. Oduzmi maxWs i izracunaj e^(x - maxWs) ===
-//            FloatVector maxVec = FloatVector.broadcast(SPECIES, maxWs);
-//            i = 0;
-//            for (; i < upperBound; i += vecLen) {
-//                FloatVector vec = FloatVector.fromArray(SPECIES, values, base + i);
-//                FloatVector expVec = vec.sub(maxVec).lanewise(VectorOperators.EXP);
-//                expVec.intoArray(values, base + i);
-//            }
-//            for (; i < C; i++) {
-//                values[base + i] = (float) Math.exp(values[base + i] - maxWs);
-//            }
-//
-//            // === 3. Racuanj sumu e^(x - maxWs) ===
-//            FloatVector sumVec = FloatVector.zero(SPECIES);
-//            i = 0;
-//            for (; i < upperBound; i += vecLen) {
-//                FloatVector vec = FloatVector.fromArray(SPECIES, values, base + i);
-//                sumVec = sumVec.add(vec);
-//            }
-//            float denomSum = sumVec.reduceLanes(VectorOperators.ADD);
-//            for (; i < C; i++) {
-//                denomSum += values[base + i];
-//            }
-//
-//            // === 4. Podeli svaki sa sumom da se dobije softmax ===
-//            FloatVector denomVec = FloatVector.broadcast(SPECIES, denomSum);
-//            i = 0;
-//            for (; i < upperBound; i += vecLen) {
-//                FloatVector vec = FloatVector.fromArray(SPECIES, values, base + i);
-//                FloatVector normVec = vec.div(denomVec);
-//                normVec.intoArray(values, base + i);
-//            }
-//            for (; i < C; i++) {
-//                values[base + i] = values[base + i] / denomSum;
-//            }
-//        }
-//    }
 
 }

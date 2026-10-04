@@ -336,7 +336,7 @@ public final class FeedForwardNetwork extends NeuralNetwork<BackpropagationTrain
             // init internal layer structures (weights, outputs, deltas etc. for each layer)
             for (AbstractLayer layer : network.getLayers()) {
                 if (DeepNetts.getInstance().useCuda()) {
-                    layer.setCudaHandles(network.cudaHandles); // if use cuda                    
+             //       layer.setCudaHandles(network.cudaHandles); // if use cuda                    
                 }
                 if (DeepNetts.getInstance().isMultithreaded()) {
                     layer.setThreadPool(network.threadPool);

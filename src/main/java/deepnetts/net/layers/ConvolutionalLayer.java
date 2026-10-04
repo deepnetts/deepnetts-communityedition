@@ -7,7 +7,6 @@
  */
 package deepnetts.net.layers;
 
-import deepnetts.accl.spi.AcceleratorService;
 import deepnetts.net.layers.activation.ActivationType;
 import deepnetts.core.DeepNetts;
 import deepnetts.util.DeepNettsException;
@@ -275,9 +274,9 @@ public final class ConvolutionalLayer extends AbstractLayer<TensorBase, TensorBa
 
         if (DeepNetts.getInstance().useCuda()) {
          //   forward = new ConvolutionalForwardCuda(cudaHandles, this);
-            forwardImpl = AcceleratorService.defaultProvider().createConvolutionalForwardAcc(cudaHandles, this);
+         //   forwardImpl = AcceleratorService.defaultProvider().createConvolutionalForwardAcc(cudaHandles, this);
            // backward = new ConvolutionalBackwardCuda(cudaHandles, this);
-            backwardImpl = AcceleratorService.defaultProvider().createConvolutionalBackwardAcc(cudaHandles, this);
+         //   backwardImpl = AcceleratorService.defaultProvider().createConvolutionalBackwardAcc(cudaHandles, this);
         } else if (!multithreaded) { // single threaded
             if (!batchMode) { // inputs instanceof Tensor1D
                 forwardImpl = new SingleThreadedForward(); // default forward

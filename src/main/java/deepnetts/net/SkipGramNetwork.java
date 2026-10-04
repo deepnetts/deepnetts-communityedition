@@ -129,7 +129,7 @@ public class SkipGramNetwork extends NeuralNetwork<BackpropagationTrainer>{
             for (AbstractLayer layer : this.network.getLayers()) {
                 
                 if (DeepNetts.getInstance().useCuda()) {
-                    layer.setCudaHandles(network.cudaHandles); // if use cuda                    
+         //           layer.setCudaHandles(network.cudaHandles); // if use cuda                    
                 }
                 
                 if (DeepNetts.getInstance().isMultithreaded()) {

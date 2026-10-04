@@ -1,6 +1,5 @@
 package deepnetts.net.layers;
 
-import deepnetts.accl.spi.AcceleratorService;
 import deepnetts.core.DeepNetts;
 import deepnetts.net.layers.activation.ActivationType;
 import deepnetts.net.train.opt.OptimizerType;
@@ -56,10 +55,8 @@ public class FlattenLayer extends AbstractLayer<TensorBase, TensorBase, TensorBa
          multithreaded = (numThreads > 1);
          
         if (DeepNetts.getInstance().useCuda()) {
-        //    forward = new FlattenForwardCuda(cudaHandles, this);
-            forwardImpl = AcceleratorService.defaultProvider().createFlattenForwardAcc(cudaHandles, this);// new FlattenForwardCuda(cudaHandles, this);
-          //  backward = new FlattenBackwardCuda(cudaHandles, this);        
-            backwardImpl = AcceleratorService.defaultProvider().createFlattenBackwardAcc(cudaHandles, this); // new FlattenBackwardCuda(cudaHandles, this);        
+        //    forwardImpl = AcceleratorService.defaultProvider().createFlattenForwardAcc(cudaHandles, this);// new FlattenForwardCuda(cudaHandles, this);
+          //  backwardImpl = AcceleratorService.defaultProvider().createFlattenBackwardAcc(cudaHandles, this); // new FlattenBackwardCuda(cudaHandles, this);        
         } else if (!multithreaded) { // single threaded
             if (!batchMode) { // inputs instanceof Tensor1D
                 forwardImpl = new SingleThreadedForward(); // default forward
