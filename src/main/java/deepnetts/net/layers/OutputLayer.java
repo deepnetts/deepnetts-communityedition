@@ -171,23 +171,18 @@ public class OutputLayer extends AbstractLayer<TensorBase, TensorBase, Tensor2D>
         // TODO: koji metod randomizacije u zavisnosti od f-je transfera? Ili inicijalizuj preterniranim modelom
         RandomWeights.randomize(biases.getValues());
 
-        if (!batchMode) {
-            forwardImpl = new SingleThreadedForward(); // ovo ce biti defaultna implementacija
-            backwardImpl = new SingleThreadedBackward();
-        } else {
-            forwardImpl = new SingleThreadedForwardBatch();
-            backwardImpl = new SingleThreadedBackwardBatch();
-        }
-
         initTransientFields();
     }
 
     @Override
     public void initTransientFields() {
 
-        if (DeepNetts.getInstance().useCuda()) {
-          //  forwardImpl = AcceleratorService.defaultProvider().createOutputForwardAcc(cudaHandles, this);
-          //  backwardImpl = AcceleratorService.defaultProvider().createOutputBackwardAcc(cudaHandles, this);
+        if (!batchMode) {
+            forwardImpl = new SingleThreadedForward();
+            backwardImpl = new SingleThreadedBackward();
+        } else {
+            forwardImpl = new SingleThreadedForwardBatch();
+            backwardImpl = new SingleThreadedBackwardBatch();
         }
 
     }

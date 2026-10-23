@@ -1,8 +1,6 @@
 package deepnetts.core;
 
 import deepnetts.util.DeepNettsThreadPool;
-//import deepnetts.license.LicenseChecker;
-//import deepnetts.license.LicenseChecker.LicenceException;
 import java.util.Properties;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Formatter;
@@ -49,7 +47,7 @@ public final class DeepNetts {
     private DeepNetts() {
         // load properties from META-INF file that should be generated during the build
         prop = new Properties();
-        prop.put("version", "3.2.0");
+        prop.put("version", "4.0.0");
         prop.put("vendor", "Deep Netts Technologies LLC");
         //  prop.put("multithreaded", "true");        
         prop.put("useCuda", "false");
@@ -80,20 +78,6 @@ public final class DeepNetts {
     public String getProperty(String propName) {
         return prop.getProperty(propName);
     }
-
-    /**
-     * Validates the Deep Netts license.
-     *
-     * @throws LicenceException if license is not valid.
-     */
-//    public static void checkLicense() {
-//        LicenseChecker checker = new LicenseChecker();
-//        try {
-//            checker.checkLicense();
-//        } catch (NullPointerException npe) {
-//            throw new LicenseChecker.LicenceException("Invalid license or license not found!");
-//        }
-//    }
 
     /**
      * Returns the Deep Netts version.
